@@ -1,0 +1,13 @@
+#!/bin/sh
+# macOS Wallpaper Switcher for BingSpotAny
+# Changes the wallpaper by sending an AppleScript command to System Events.
+
+IMAGE_PATH="$1"
+
+# Check if the argument is empty
+if [ -z "$IMAGE_PATH" ]; then
+    exit 1
+fi
+
+# Update the picture of every desktop (supports multi-monitor setups)
+osascript -e "tell application \"System Events\" to set picture of every desktop to \"$IMAGE_PATH\""

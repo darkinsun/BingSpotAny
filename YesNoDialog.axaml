@@ -1,0 +1,17 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="BingSpotAny.YesNoDialog"
+        Title="Question" 
+        Width="400" Height="200" 
+        WindowStartupLocation="CenterOwner" 
+        CanResize="False"
+        WindowDecorations="Full">
+    <Grid RowDefinitions="*,Auto" Margin="24">
+        <TextBlock Name="TxtMessage" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center"/>
+        
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Spacing="16" Margin="0,20,0,0">
+            <Button Content="No" Click="No_Click" Width="100" HorizontalContentAlignment="Center" Background="#FFE0E0E0" Foreground="#333333"/>
+            <Button Content="Yes" Click="Yes_Click" Width="100" HorizontalContentAlignment="Center" Background="#0078D7" Foreground="White"/>
+        </StackPanel>
+    </Grid>
+</Window>

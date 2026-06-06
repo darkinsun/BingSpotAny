@@ -1,0 +1,167 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="BingSpotAny.SettingsWindow"
+        Title="Settings"
+        Width="460" Height="620"
+        WindowStartupLocation="CenterScreen"
+        CanResize="False"
+        WindowDecorations="Full"
+        Background="#FFF5F5F7">
+
+    <Grid RowDefinitions="*, Auto" Margin="16">
+        <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto" Padding="0,0,8,0">
+            <StackPanel Spacing="16">
+
+                <Border Background="White" CornerRadius="8" Padding="12" BoxShadow="0 2 4 0 #10000000">
+                    <StackPanel Spacing="12">
+                        <TextBlock Text="Automatic Wallpaper" FontWeight="Bold" Foreground="#333333" FontSize="14"/>
+                        <Separator Background="#EEEEEE"/>
+
+                        <Grid ColumnDefinitions="*, Auto">
+                            <TextBlock Grid.Column="0" Text="Run at System Startup" VerticalAlignment="Center"/>
+                            <ToggleSwitch Grid.Column="1" Name="ToggleStartup" OnContent="" OffContent=""/>
+                        </Grid>
+
+                        <Grid ColumnDefinitions="*, Auto">
+                            <TextBlock Grid.Column="0" Text="Daily Auto Change" VerticalAlignment="Center"/>
+                            <ToggleSwitch Grid.Column="1" Name="ToggleAutoChange" IsChecked="False" OnContent="" OffContent=""/>
+                        </Grid>
+
+                        <Grid ColumnDefinitions="*, Auto">
+                            <TextBlock Grid.Column="0" Text="Change Time (HH:MM)" VerticalAlignment="Center"/>
+                            <TextBox Grid.Column="1" Name="TxtAutoTime" Width="140" PlaceholderText="09:00" TextAlignment="Center"/>
+                        </Grid>
+
+                        <Grid ColumnDefinitions="*, Auto">
+                            <TextBlock Grid.Column="0" Text="Default Provider" VerticalAlignment="Center"/>
+                            <ComboBox Grid.Column="1" Name="ComboProvider" Width="140">
+                                <ComboBoxItem Content="Bing"/>
+                                <ComboBoxItem Content="SpotLight"/>
+                            </ComboBox>
+                        </Grid>
+                        
+                        <Grid ColumnDefinitions="*, Auto">
+                            <TextBlock Grid.Column="0" Text="Archive All Images" VerticalAlignment="Center" ToolTip.Tip="Saves a copy of every downloaded image to the archive folder."/>
+                            <ToggleSwitch Grid.Column="1" Name="ToggleArchive" OnContent="" OffContent=""/>
+                        </Grid>
+                    </StackPanel>
+                </Border>
+
+                <Border Background="White" CornerRadius="8" Padding="12" BoxShadow="0 2 4 0 #10000000">
+                    <StackPanel Spacing="12">
+                        <TextBlock Text="Visual Settings" FontWeight="Bold" Foreground="#333333" FontSize="14"/>
+                        <Separator Background="#EEEEEE"/>
+
+                        <Grid ColumnDefinitions="*, Auto">
+                            <TextBlock Grid.Column="0" Text="Embed Description (Watermark)" VerticalAlignment="Center" ToolTip.Tip="Draws the image description directly onto the image pixels."/>
+                            <ToggleSwitch Grid.Column="1" Name="ToggleWatermark" OnContent="" OffContent=""/>
+                        </Grid>
+
+                        <Grid ColumnDefinitions="*, Auto">
+                            <TextBlock Grid.Column="0" Text="Text Position" VerticalAlignment="Center"/>
+                            <ComboBox Grid.Column="1" Name="ComboPosition" Width="140">
+                                <ComboBoxItem Content="TopLeft"/>
+                                <ComboBoxItem Content="TopRight"/>
+                                <ComboBoxItem Content="BottomLeft"/>
+                                <ComboBoxItem Content="BottomRight"/>
+                            </ComboBox>
+                        </Grid>
+
+                        <Grid ColumnDefinitions="*, Auto">
+                            <TextBlock Grid.Column="0" Text="Font Family" VerticalAlignment="Center" ToolTip.Tip="Select an installed system font."/>
+                            <ComboBox Grid.Column="1" Name="ComboFontFamily" Width="140" />
+                        </Grid>
+
+                        <Grid ColumnDefinitions="*, Auto">
+                            <TextBlock Grid.Column="0" Text="Font Size" VerticalAlignment="Center"/>
+                            <NumericUpDown Grid.Column="1" Name="NumFontSize" Width="140" Minimum="8" Maximum="72" Value="18"/>
+                        </Grid>
+
+                        <Grid ColumnDefinitions="*, Auto">
+                            <TextBlock Grid.Column="0" Text="Text Color" VerticalAlignment="Center" ToolTip.Tip="Select a watermark text color from the palette."/>
+                            <ColorPicker Grid.Column="1" Name="PickerColor" Width="140" />
+                        </Grid>
+                        
+                        <Border Background="#FFF3CD"
+                                BorderBrush="#FFEEBA"
+                                BorderThickness="1"
+                                CornerRadius="6"
+                                Padding="12,10"
+                                Margin="0,16,0,0">
+                            <Grid ColumnDefinitions="Auto, *">
+                                <PathIcon Grid.Column="0" 
+                                          Data="M11,9H13V7H11M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M11,17H13V11H11V17Z"
+                                          Foreground="#856404"
+                                          Width="20" Height="20"
+                                          VerticalAlignment="Top"
+                                          Margin="0,2,10,0"/>
+
+                                <TextBlock Grid.Column="1"
+                                           TextWrapping="Wrap"
+                                           FontSize="13"
+                                           Foreground="#856404"
+                                           VerticalAlignment="Center">
+                                    <Run FontWeight="SemiBold">Note:</Run> These settings (enable watermark, font, size, color) will only apply to new wallpapers downloaded from now on. Existing images in your archive will not be affected. If you want to test the new settings immediately, you can delete the current images in the 'current' folder of your active provider. Also if you want to archive watermarked versions of current wallpapers, you can manually copy and overwrite these images to archive folder.
+                                </TextBlock>
+                            </Grid>
+                        </Border>
+                    </StackPanel>
+                </Border>
+
+                <Border Background="White" CornerRadius="8" Padding="12" BoxShadow="0 2 4 0 #10000000">
+                    <StackPanel Spacing="12">
+                        <TextBlock Text="Advanced Scripts" FontWeight="Bold" Foreground="#333333" FontSize="14"/>
+                        <Separator Background="#EEEEEE"/>
+
+                        <TextBlock Text="Operating System Integrations" FontWeight="SemiBold" FontSize="12" Foreground="#666666" Margin="0,0,0,4"/>
+
+                        <Grid ColumnDefinitions="*, Auto, Auto">
+                            <TextBlock Grid.Column="0" Text="Linux Script (.sh)" VerticalAlignment="Center"/>
+                            <TextBox Grid.Column="1" Name="TxtLinuxScript" Width="150" Margin="0,0,4,0"/>
+                            <Button Grid.Column="2" Content="..." Tag="TxtLinuxScript" Click="BrowseScript_Click" Width="30" HorizontalContentAlignment="Center"/>
+                        </Grid>
+
+                        <Grid ColumnDefinitions="*, Auto, Auto">
+                            <TextBlock Grid.Column="0" Text="Windows Script (.bat)" VerticalAlignment="Center"/>
+                            <TextBox Grid.Column="1" Name="TxtWindowsScript" Width="150" Margin="0,0,4,0"/>
+                            <Button Grid.Column="2" Content="..." Tag="TxtWindowsScript" Click="BrowseScript_Click" Width="30" HorizontalContentAlignment="Center"/>
+                        </Grid>
+
+                        <Grid ColumnDefinitions="*, Auto, Auto">
+                            <TextBlock Grid.Column="0" Text="MacOS Script (.apple)" VerticalAlignment="Center"/>
+                            <TextBox Grid.Column="1" Name="TxtMacScript" Width="150" Margin="0,0,4,0"/>
+                            <Button Grid.Column="2" Content="..." Tag="TxtMacScript" Click="BrowseScript_Click" Width="30" HorizontalContentAlignment="Center"/>
+                        </Grid>
+
+                        <Grid ColumnDefinitions="*, Auto, Auto">
+                            <TextBlock Grid.Column="0" Text="Custom OS Script" VerticalAlignment="Center"/>
+                            <TextBox Grid.Column="1" Name="TxtCustomScript" Width="150" Margin="0,0,4,0"/>
+                            <Button Grid.Column="2" Content="..." Tag="TxtCustomScript" Click="BrowseScript_Click" Width="30" HorizontalContentAlignment="Center"/>
+                        </Grid>
+
+                        <Separator Background="#EEEEEE"/>
+                        <TextBlock Text="Post-Execution Hooks" FontWeight="SemiBold" FontSize="12" Foreground="#666666" Margin="0,0,0,4"/>
+
+                        <Grid ColumnDefinitions="*, Auto">
+                            <TextBlock Grid.Column="0" Text="Enable Post-Script" VerticalAlignment="Center" ToolTip.Tip="Runs a secondary script after the wallpaper is successfully applied."/>
+                            <ToggleSwitch Grid.Column="1" Name="TogglePostScript" OnContent="" OffContent=""/>
+                        </Grid>
+
+                        <Grid ColumnDefinitions="*, Auto, Auto">
+                            <TextBlock Grid.Column="0" Text="Post-Script Path" VerticalAlignment="Center" ToolTip.Tip="Path to the secondary script (e.g., executing a theme engine refresh)."/>
+                            <TextBox Grid.Column="1" Name="TxtPostScript" Width="150" Margin="0,0,4,0"/>
+                            <Button Grid.Column="2" Content="..." Tag="TxtPostScript" Click="BrowseScript_Click" Width="30" HorizontalContentAlignment="Center"/>
+                        </Grid>
+
+                    </StackPanel>
+                </Border>
+
+            </StackPanel>
+        </ScrollViewer>
+
+        <Grid Grid.Row="1" ColumnDefinitions="*, *" Margin="0,16,0,0">
+            <Button Grid.Column="0" Content="Cancel" Click="Cancel_Click" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Background="#FFE0E0E0" Foreground="#333333" Margin="0,0,6,0"/>
+            <Button Grid.Column="1" Content="Save" Click="Save_Click" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Background="#0078D7" Foreground="White" Margin="6,0,0,0"/>
+        </Grid>
+    </Grid>
+</Window>
