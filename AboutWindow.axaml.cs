@@ -20,7 +20,7 @@ namespace BingSpotAny
         private void Project_Click(object? sender, RoutedEventArgs e)
         {
             // URL to the main GitHub repository
-            string projectUrl = "https://github.com/yourusername/BingSpotAny";
+            string projectUrl = "https://github.com/darkinsun/BingSpotAny";
             OpenUrl(projectUrl);
         }
 
@@ -28,7 +28,7 @@ namespace BingSpotAny
         {
             // URL to the specific donation page or sponsor link within GitHub
             // Example: "https://github.com/sponsors/yourusername" or a specific markdown file
-            string donateUrl = "https://github.com/yourusername/BingSpotAny/blob/main/DONATE.md"; 
+            string donateUrl = "https://github.com/darkinsun/BingSpotAny/blob/main/DONATE.md"; 
             OpenUrl(donateUrl);
         }
 
