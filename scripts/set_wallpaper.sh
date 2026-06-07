@@ -1,5 +1,12 @@
 #!/usr/bin/env bash
 #
+# ==============================================================================
+# ACKNOWLEDGEMENT:
+# This script contains modified code originally adapted from the Variety project.
+# Variety is an open-source project licensed under the GNU General Public License v3.0 (GPLv3).
+# Original project repository: https://github.com/varietywalls/variety
+# ==============================================================================
+#
 # This script is run by Variety when a new wallpaper is set. You can use Bash, Python or whatever suits you best.
 # Here you can put custom commands for setting the wallpaper on your specific desktop environment,
 # or run commands like notify-send that notify you of the change. You can also add commands to theme your browser,

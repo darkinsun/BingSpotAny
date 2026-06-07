@@ -3,76 +3,53 @@
         x:Class="BingSpotAny.AboutWindow"
         Title="About BingSpotAny"
         Icon="avares://BingSpotAny/Assets/icon.png"
-        Width="350" Height="320"
+        Width="350" Height="360"
         WindowStartupLocation="CenterScreen"
         CanResize="False"
         ExtendClientAreaToDecorationsHint="True">
     
     <Window.Resources>
         <Geometry x:Key="StarPathData">M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z</Geometry>
-        
         <Geometry x:Key="CoffeePathData">M20,11H4V13H20V11M22,13V15.5C22,17.9 20,20.2 17.5,21H6.5C4,20.2 2,17.9 2,15.5V13M13,2V5H10.5L9,2H13Z</Geometry>
+        <Geometry x:Key="LicensePathData">M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20M16,11V13H8V11H16M14,15V17H8V15H14Z</Geometry>
     </Window.Resources>
 
     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="8" Margin="20">
         
-        <TextBlock Text="BingSpotAny" 
-                   FontSize="24" 
-                   FontWeight="Bold" 
-                   HorizontalAlignment="Center"/>
-        
-        <TextBlock Text="Version 1.0.0" 
-                   FontSize="14" 
-                   Foreground="Gray" 
-                   HorizontalAlignment="Center"/>
+        <TextBlock Text="BingSpotAny" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center"/>
+        <TextBlock Text="Version 1.0.0" FontSize="14" Foreground="Gray" HorizontalAlignment="Center"/>
         
         <TextBlock Text="A cross-platform daily wallpaper manager powered by .NET and Avalonia UI." 
-                   TextWrapping="Wrap" 
-                   TextAlignment="Center" 
-                   Margin="0,10,0,10"/>
+                   TextWrapping="Wrap" TextAlignment="Center" Margin="0,10,0,10"/>
         
-        <Button Background="Transparent"
-                Foreground="#007ACC"
-                Cursor="Hand"
-                HorizontalAlignment="Center"
-                Click="Project_Click">
+        <Button Background="Transparent" Foreground="#007ACC" Cursor="Hand" HorizontalAlignment="Center" Click="Project_Click">
             <StackPanel Orientation="Horizontal" Spacing="5">
                 <Viewbox Width="18" Height="18">
-                    <Path Data="{StaticResource StarPathData}" 
-                          Fill="#FFD700" 
-                          Stroke="#B8860B" 
-                          StrokeThickness="1"/>
+                    <Path Data="{StaticResource StarPathData}" Fill="#FFD700" Stroke="#B8860B" StrokeThickness="1"/>
                 </Viewbox>
                 <TextBlock Text="View on GitHub"/>
             </StackPanel>
         </Button>
 
-        <Button Background="Transparent"
-                Foreground="#28A745"
-                Cursor="Hand"
-                HorizontalAlignment="Center"
-                Click="Donate_Click"
-                Margin="0,0,0,10">
+        <Button Background="Transparent" Foreground="#6C757D" Cursor="Hand" HorizontalAlignment="Center" Click="License_Click">
             <StackPanel Orientation="Horizontal" Spacing="5">
                 <Viewbox Width="18" Height="18">
-                    <Path Data="{StaticResource CoffeePathData}" 
-                          Fill="#8B4513" 
-                          Stroke="#5D4037" 
-                          StrokeThickness="1"/>
+                    <Path Data="{StaticResource LicensePathData}" Fill="#E9ECEF" Stroke="#6C757D" StrokeThickness="1"/>
+                </Viewbox>
+                <TextBlock Text="License: GNU GPLv3"/>
+            </StackPanel>
+        </Button>
+
+        <Button Background="Transparent" Foreground="#28A745" Cursor="Hand" HorizontalAlignment="Center" Click="Donate_Click" Margin="0,0,0,10">
+            <StackPanel Orientation="Horizontal" Spacing="5">
+                <Viewbox Width="18" Height="18">
+                    <Path Data="{StaticResource CoffeePathData}" Fill="#8B4513" Stroke="#5D4037" StrokeThickness="1"/>
                 </Viewbox>
                 <TextBlock Text="Support / Donate"/>
             </StackPanel>
         </Button>
         
-        <TextBlock Text="© 2026" 
-                   FontSize="12" 
-                   Foreground="Gray" 
-                   HorizontalAlignment="Center"/>
-        
-        <Button Content="Close" 
-                Width="100" 
-                HorizontalAlignment="Center" 
-                HorizontalContentAlignment="Center" 
-                Click="Close_Click"/>
+        <TextBlock Text="© 2026" FontSize="12" Foreground="Gray" HorizontalAlignment="Center"/>
+        <Button Content="Close" Width="100" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Click="Close_Click"/>
     </StackPanel>
 </Window>

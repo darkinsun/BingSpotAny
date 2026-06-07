@@ -23,7 +23,12 @@ namespace BingSpotAny
             string projectUrl = "https://github.com/darkinsun/BingSpotAny";
             OpenUrl(projectUrl);
         }
-
+        private void License_Click(object? sender, RoutedEventArgs e)
+        {
+            // URL directly pointing to the LICENSE file in your GitHub repository
+            string licenseUrl = "https://github.com/darkinsun/BingSpotAny/blob/main/LICENSE";
+            OpenUrl(licenseUrl);
+        }
         private void Donate_Click(object? sender, RoutedEventArgs e)
         {
             // URL to the specific donation page or sponsor link within GitHub
@@ -31,7 +36,7 @@ namespace BingSpotAny
             string donateUrl = "https://github.com/darkinsun/BingSpotAny/blob/main/DONATE.md"; 
             OpenUrl(donateUrl);
         }
-
+        
         private void OpenUrl(string url)
         {
             try
