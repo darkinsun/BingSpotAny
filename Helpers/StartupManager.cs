@@ -85,6 +85,26 @@ namespace BingSpotAny
                     }
                     else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
                     {
+                        // Launchd cannot execute a single string command with spaces (like a shell does). 
+                        // We must provide the executable and its arguments separately within an XML Array.
+                        string plistArgs;
+
+                        if (File.Exists(exePath))
+                        {
+                            // If the application is compiled as a native executable (.app or self-contained)
+                            plistArgs = $"    <string>{exePath}</string>\n";
+                        }
+                        else
+                        {
+                            // If running via 'dotnet run' or directly invoking the DLL
+                            // Since Launchd doesn't know environment variables (like PATH), we must provide the absolute path to 'dotnet'
+                            string dotnetPath = "/usr/local/share/dotnet/dotnet";
+                            string dllPath = Path.Combine(baseDir, exeName + ".dll");
+
+                            plistArgs = $"    <string>{dotnetPath}</string>\n" +
+                                        $"    <string>{dllPath}</string>\n";
+                        }
+
                         string plistContent = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                                               "<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n" +
                                               "<plist version=\"1.0\">\n" +
@@ -93,12 +113,13 @@ namespace BingSpotAny
                                               "  <string>com.bingspotany.app</string>\n" +
                                               "  <key>ProgramArguments</key>\n" +
                                               "  <array>\n" +
-                                              $"    <string>{execCommand}</string>\n" +
+                                              plistArgs +
                                               "  </array>\n" +
                                               "  <key>RunAtLoad</key>\n" +
                                               "  <true/>\n" +
                                               "</dict>\n" +
                                               "</plist>";
+
                         File.WriteAllText(path, plistContent);
                     }
 
