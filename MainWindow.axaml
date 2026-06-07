@@ -95,7 +95,15 @@ Background="{StaticResource ThemeBackgroundBrush}">
                             Spacing="8"
                             VerticalAlignment="Bottom"
                             HorizontalAlignment="Right">
-
+                    <Button Content="About"
+                            VerticalAlignment="Bottom"
+                            HorizontalAlignment="Left"
+                            Background="Transparent"
+                            Foreground="Gray"
+                            Cursor="Hand"
+                            BorderThickness="0"
+                            Click="About_Click"
+                            Margin="10"/>
                     <Button Name="BtnOpenArchive"
                             Click="OpenArchive_Click"
                             Width="40" Height="40"
@@ -119,6 +127,6 @@ Background="{StaticResource ThemeBackgroundBrush}">
 
             </Grid>
         </Border>
-
+     
     </Grid>
 </Window>

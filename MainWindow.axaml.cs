@@ -88,5 +88,11 @@ namespace BingSpotAny
                 Debug.WriteLine($"[FOLDER OPEN ERROR] Failed to open path {folderPath}: {ex.Message}");
             }
         }
+        private void About_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+        {
+            var aboutWin = new AboutWindow();
+          
+            aboutWin.ShowDialog(this); 
+        }
     }
 }

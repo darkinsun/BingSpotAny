@@ -103,6 +103,13 @@ namespace BingSpotAny
             settingsWin.Activate(); 
         }
 
+        private void ShowAbout_Click(object? sender, EventArgs e)
+        {
+            var aboutWin = new AboutWindow();
+            aboutWin.Show();
+            aboutWin.Activate();
+        }
+
         private void Exit_Click(object? sender, EventArgs e)
         {
             Environment.Exit(0);
