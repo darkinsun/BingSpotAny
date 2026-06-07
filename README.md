@@ -30,7 +30,7 @@ BingSpotAny is actively developed and tested to ensure stability across various 
 ## 🚀 Installation
 
 ### Windows
-1. Download the latest `BingSpotAny-Windows.zip` from the [Releases](https://github.com/yourusername/BingSpotAny/releases) page.
+1. Download the latest `BingSpotAny-Windows.zip` from the [Releases](https://github.com/darkinsun/BingSpotAny/releases) page.
 2. Extract the folder and run `BingSpotAny.exe`.
 
 ### Linux (Quick Install)
@@ -39,7 +39,7 @@ For Linux users, a streamlined installation script is provided to compile the ap
 1. Ensure you have the `.NET 8.0 SDK` installed.
 2. Clone the repository and run the install script:
 ```bash
-git clone [https://github.com/yourusername/BingSpotAny.git](https://github.com/yourusername/BingSpotAny.git)
+git clone [https://github.com/darkinsun/BingSpotAny.git](https://github.com/darkinsun/BingSpotAny.git)
 cd BingSpotAny
 chmod +x install.sh
 ./install.sh
@@ -51,7 +51,7 @@ chmod +x install.sh
 If you prefer to compile the application yourself:
 ```bash
 # Clone the repository
-git clone [https://github.com/yourusername/BingSpotAny.git](https://github.com/yourusername/BingSpotAny.git)
+git clone [https://github.com/darkinsun/BingSpotAny.git](https://github.com/darkinsun/BingSpotAny.git)
 cd BingSpotAny
 
 # Build and run the project
@@ -65,8 +65,8 @@ dotnet run
 
 We welcome community involvement! Here is how you can contribute or get help:
 
-* **Bug Reports:** If you discover a bug or have a concrete feature request, please open an issue in the **[Issues](https://github.com/yourusername/BingSpotAny/issues)** tab. Include your operating system details and steps to reproduce the problem.
-* **Support & Questions:** Need help with installation, have a general question, or want to share an idea? Please join our community in the **[Discussions](https://github.com/yourusername/BingSpotAny/discussions)** tab.
+* **Bug Reports:** If you discover a bug or have a concrete feature request, please open an issue in the **[Issues](https://github.com/darkinsun/BingSpotAny/issues)** tab. Include your operating system details and steps to reproduce the problem.
+* **Support & Questions:** Need help with installation, have a general question, or want to share an idea? Please join our community in the **[Discussions](https://github.com/darkinsun/BingSpotAny/discussions)** tab.
 * **Pull Requests:** Contributions to the codebase are highly appreciated. Please ensure you are working on the `dev` branch before submitting a PR.
 
 ---
