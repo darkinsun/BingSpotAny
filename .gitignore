@@ -61,3 +61,5 @@ nunit-*.xml
 # macOS system files
 .DS_Store
 **/.DS_Store
+# Publish files
+publish/
