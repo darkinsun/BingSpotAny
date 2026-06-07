@@ -30,7 +30,7 @@ BingSpotAny is actively developed and tested to ensure stability across various 
 ## 🚀 Installation
 
 ### Windows
-1. Download the latest `BingSpotAny-Windows.zip` from the [Releases](../../releases) page.
+1. Download the latest `BingSpotAny-Windows.zip` from the [Releases](https://github.com/yourusername/BingSpotAny/releases) page.
 2. Extract the folder and run `BingSpotAny.exe`.
 
 ### Linux (Quick Install)
@@ -43,12 +43,13 @@ git clone [https://github.com/yourusername/BingSpotAny.git](https://github.com/y
 cd BingSpotAny
 chmod +x install.sh
 ./install.sh
+```
 
-(Note: Native Arch Linux (AUR) and Flatpak packages are currently in development.)
-Build From Source (All Platforms)
+*(Note: Native Arch Linux (AUR) and Flatpak packages are currently in development.)*
 
+### Build From Source (All Platforms)
 If you prefer to compile the application yourself:
-
+```bash
 # Clone the repository
 git clone [https://github.com/yourusername/BingSpotAny.git](https://github.com/yourusername/BingSpotAny.git)
 cd BingSpotAny
@@ -56,14 +57,30 @@ cd BingSpotAny
 # Build and run the project
 dotnet build
 dotnet run
+```
 
-📜 Acknowledgements & License
+---
 
-This project is licensed under the GNU General Public License v3.0 (GPLv3). See the LICENSE file for more details.
+## 🐛 Bug Reports & Support
 
-Special Thanks: This application utilizes a modified wallpaper-changing script originally adapted from the Variety project, which is also licensed under GPLv3. We extend our gratitude to the Variety developers for their excellent work in the open-source Linux community.
-☕ Support the Project
+We welcome community involvement! Here is how you can contribute or get help:
+
+* **Bug Reports:** If you discover a bug or have a concrete feature request, please open an issue in the **[Issues](https://github.com/yourusername/BingSpotAny/issues)** tab. Include your operating system details and steps to reproduce the problem.
+* **Support & Questions:** Need help with installation, have a general question, or want to share an idea? Please join our community in the **[Discussions](https://github.com/yourusername/BingSpotAny/discussions)** tab.
+* **Pull Requests:** Contributions to the codebase are highly appreciated. Please ensure you are working on the `dev` branch before submitting a PR.
+
+---
+
+## 📜 Acknowledgements & License
+
+This project is licensed under the **GNU General Public License v3.0 (GPLv3)**. See the [LICENSE](LICENSE) file for more details.
+
+**Special Thanks:** This application utilizes a modified wallpaper-changing script originally adapted from the [Variety](https://github.com/varietywalls/variety) project, which is also licensed under GPLv3. We extend our gratitude to the Variety developers for their excellent work in the open-source Linux community.
+
+---
+
+## ☕ Support the Project
 
 BingSpotAny is an open-source project distributed for free. If you find it useful and want to support its continued development, you can buy me a coffee!
 
-Please visit the DONATE page for details on how to support the project via Patreon or direct Cryptocurrency transfers.
+Please visit the **[DONATE](DONATE.md)** page for details on how to support the project via Patreon or direct Cryptocurrency transfers.
