@@ -32,53 +32,75 @@ namespace BingSpotAny
             base.OnFrameworkInitializationCompleted();
         }
 
-        // Renamed and fortified: Pushes the task to a completely independent thread pool
         public static void TriggerWallpaperCheck()
         {
             if (Application.Current is App currentApp)
             {
-                // Task.Run ensures the background process survives even if the Settings window closes instantly
                 Task.Run(async () => await currentApp.CheckAutoChangeAsync());
             }
         }
 
-        // --- TRAY ICON MENU EVENTS ---
-        private void ShowMainWindow_Click(object? sender, EventArgs e)
+        // --- CENTRAL WINDOW MANAGER ---
+        public static void ShowMainWindow()
         {
-            if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+            if (Current?.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
-                // If the window has never been opened before, or if it was closed and set to null:
-                if (desktop.MainWindow == null)
+                try
                 {
-                    // Create the window from scratch in RAM
-                    desktop.MainWindow = new MainWindow { DataContext = new MainWindowViewModel() };
-                    
-                    // Clear the reference when the window is closed (when X is pressed) so it can be deleted from RAM.
-                    desktop.MainWindow.Closed += (s, args) => 
+                    if (desktop.MainWindow == null)
                     {
-                        desktop.MainWindow = null;
-                    };
-                    
-                    desktop.MainWindow.Show();
+                        CreateAndShowWindow(desktop);
+                    }
+                    else
+                    {
+                        desktop.MainWindow.Show();
+                        desktop.MainWindow.WindowState = Avalonia.Controls.WindowState.Normal;
+                        desktop.MainWindow.Activate(); 
+                    }
                 }
-                else
+                catch (System.InvalidOperationException)
                 {
-                    // If the window is already open (just behind another application), bring it to the foreground.
-                    desktop.MainWindow.Activate(); 
+                    // If the window reference remains but it is physically closed (Zombie Window)
+                    CreateAndShowWindow(desktop);
                 }
             }
         }
+
+        private static void CreateAndShowWindow(IClassicDesktopStyleApplicationLifetime desktop)
+        {
+            desktop.MainWindow = new MainWindow
+            {
+                DataContext = new MainWindowViewModel()
+            };
+
+            // ZOMBIE WINDOW DEFINITIVE SOLUTION: Reset the reference when the window closes!
+            desktop.MainWindow.Closed += (s, e) => 
+            { 
+                desktop.MainWindow = null; 
+            };
+
+            desktop.MainWindow.Show();
+        }
+
+        // --- TRAY ICON MENU EVENTS ---
+        
+        // When "Mainwindow" is selected from the tray menu
+        private void ShowMainWindow_Click(object? sender, EventArgs e)
+        {
+            ShowMainWindow();
+        }
+
+        // When you double-click the tray icon (logo)
+        private void TrayIcon_Clicked(object? sender, EventArgs e)
+        {
+            ShowMainWindow();
+        }
+
         private void ShowSettings_Click(object? sender, EventArgs e)
         {
             var settingsWin = new SettingsWindow();
             settingsWin.Show();
             settingsWin.Activate(); 
-        }
-
-        // Open Mainwindow on doubleclcik or click.
-        private void TrayIcon_Clicked(object? sender, EventArgs e)
-        {
-            ShowMainWindow_Click(sender, e);
         }
 
         private void Exit_Click(object? sender, EventArgs e)
@@ -106,22 +128,14 @@ namespace BingSpotAny
 
                 if (TimeSpan.TryParse(settings.AutoChangeTime, out TimeSpan targetTimeOfDay))
                 {
-                    // Construct today's exact target DateTime
                     DateTime targetDateTime = DateTime.Today.Add(targetTimeOfDay);
                     long targetUnixTime = new DateTimeOffset(targetDateTime).ToUnixTimeSeconds();
 
-                    // Logic 1: Has the clock passed the target time today?
                     bool isTimePassed = currentUnixTime >= targetUnixTime;
-                    
-                    // Logic 2: Is the last execution time older than today's target time?
                     bool notExecutedYet = settings.LastAutoChangeTime < targetUnixTime;
-
-                    // Logic 3: Is this the very first time the app is running?
                     bool isFirstRun = settings.LastAutoChangeTime == 0;
 
-                    System.Diagnostics.Debug.WriteLine($"[TIME CHECK] Current: {currentUnixTime}, Target: {targetUnixTime}, LastRun: {settings.LastAutoChangeTime}");
-
-                    if (isTimePassed && notExecutedYet || isFirstRun)
+                    if ((isTimePassed && notExecutedYet) || isFirstRun)
                     {
                         shouldExecute = true;
                     }
@@ -147,7 +161,6 @@ namespace BingSpotAny
                         {
                             System.Diagnostics.Debug.WriteLine("[AUTO-CHANGE] SUCCESS: Wallpaper applied.");
                             
-                            // Mark exact execution moment to prevent duplicate runs
                             settings.CurrentWallpaperPath = targetImagePath;
                             settings.LastAutoChangeTime = currentUnixTime; 
                             SettingsManager.SaveSettings(settings);
@@ -156,10 +169,6 @@ namespace BingSpotAny
                         {
                             System.Diagnostics.Debug.WriteLine("[AUTO-CHANGE] ERROR: Script execution failed.");
                         }
-                    }
-                    else
-                    {
-                        System.Diagnostics.Debug.WriteLine("[AUTO-CHANGE] ERROR: Provider returned 0 wallpapers.");
                     }
                 }
             }
