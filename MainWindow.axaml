@@ -5,6 +5,7 @@ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 xmlns:vm="using:BingSpotAny.ViewModels"
 x:DataType="vm:MainWindowViewModel"
 Title="BingSpotAny"
+Icon="avares://BingSpotAny/Assets/icon.png"
 Width="900" Height="540"
 WindowStartupLocation="CenterScreen"
 Background="{StaticResource ThemeBackgroundBrush}">

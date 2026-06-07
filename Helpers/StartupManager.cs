@@ -73,15 +73,16 @@ namespace BingSpotAny
 
                     if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
                     {
+                      string iconPath = Path.Combine(baseDir, "Assets", "icon.png");
+
                         string desktopContent = "[Desktop Entry]\n" +
                                                 "Type=Application\n" +
                                                 $"Name={AppName}\n" +
                                                 $"Exec={execCommand}\n" +
-                                                "Terminal=false\n" +
+                                                $"Icon={iconPath}\n" + 
                                                 "Hidden=false\n" +
                                                 "NoDisplay=false\n";
                         File.WriteAllText(path, desktopContent);
-                        // Standard rw-r--r-- permission is sufficient for XDG autostart
                     }
                     else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
                     {
