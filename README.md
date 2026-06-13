@@ -5,7 +5,6 @@ A modern, cross-platform daily wallpaper manager built with **.NET 8.0** and **A
 BingSpotAny seamlessly fetches and applies beautiful daily wallpapers from providers like Bing and Windows Spotlight, bringing fresh backgrounds to your desktop environment every day. 
 
 ![BingSpotAny Screenshot](Assets/screenshot_placeholder.png)
-*(Note: Replace this placeholder with an actual screenshot of your app)*
 
 ---
 
@@ -29,33 +28,36 @@ BingSpotAny is actively developed and tested to ensure stability across various 
 
 ## 🚀 Installation
 
+BingSpotAny is distributed as a **self-contained** application. You do not need to install .NET or any other frameworks to run it!
+
 ### Windows
-1. Download the latest `BingSpotAny-Windows.zip` from the [Releases](https://github.com/darkinsun/BingSpotAny/releases) page.
-2. Extract the folder and run `BingSpotAny.exe`.
+1. Download the latest `BingSpotAny-Windows-x64.zip` from the [Releases](https://github.com/darkinsun/BingSpotAny/releases) page.
+2. Extract the folder to your preferred location.
+3. Double-click `BingSpotAny.exe` to run. 
+*(Note: If Windows SmartScreen prompts you, click "More info" and "Run anyway".)*
 
-### Linux (Quick Install)
-For Linux users, a streamlined installation script is provided to compile the app and add it to your application menu automatically.
-
-1. Ensure you have the `.NET 8.0 SDK` installed.
-2. Clone the repository and run the install script:
+### Linux (Portable)
+1. Download the latest `BingSpotAny-Linux-x64.tar.gz` from the [Releases](https://github.com/darkinsun/BingSpotAny/releases) page.
+2. Extract the archive to a folder in your home directory (e.g., `~/BingSpotAny`).
+3. Open your terminal in the extracted folder and execute the application:
 ```bash
-git clone [https://github.com/darkinsun/BingSpotAny.git](https://github.com/darkinsun/BingSpotAny.git)
-cd BingSpotAny
-chmod +x install.sh
-./install.sh
+./BingSpotAny
 ```
-
 *(Note: Native Arch Linux (AUR) and Flatpak packages are currently in development.)*
+
+### macOS
+1. Download the latest `BingSpotAny-macOS-x64.zip` from the [Releases](https://github.com/darkinsun/BingSpotAny/releases) page.
+2. Extract the archive.
+3. Right-click the extracted application and select **Open** (this is required on the first launch to bypass Gatekeeper).
 
 ### Build From Source (All Platforms)
 If you prefer to compile the application yourself:
 ```bash
 # Clone the repository
-git clone [https://github.com/darkinsun/BingSpotAny.git](https://github.com/darkinsun/BingSpotAny.git)
+git clone https://github.com/darkinsun/BingSpotAny.git
 cd BingSpotAny
 
 # Build and run the project
-dotnet build
 dotnet run
 ```
 
