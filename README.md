@@ -30,12 +30,6 @@ BingSpotAny is actively developed and tested to ensure stability across various 
 
 BingSpotAny is distributed as a **self-contained** application. You do not need to install .NET or any other frameworks to run it!
 
-### Windows
-1. Download the latest `BingSpotAny-Windows-x64.zip` from the [Releases](https://github.com/darkinsun/BingSpotAny/releases) page.
-2. Extract the folder to your preferred location.
-3. Double-click `BingSpotAny.exe` to run. 
-*(Note: If Windows SmartScreen prompts you, click "More info" and "Run anyway".)*
-
 ### Linux (Portable)
 1. Download the latest `BingSpotAny-Linux-x64.tar.gz` from the [Releases](https://github.com/darkinsun/BingSpotAny/releases) page.
 2. Extract the archive to a folder in your home directory (e.g., `~/BingSpotAny`).
@@ -43,7 +37,30 @@ BingSpotAny is distributed as a **self-contained** application. You do not need 
 ```bash
 ./BingSpotAny
 ```
-*(Note: Native Arch Linux (AUR) and Flatpak packages are currently in development.)*
+
+### Arch Linux & Derivatives (Manjaro, CachyOS, EndeavourOS)
+Download the `.pkg.tar.zst` file and install it locally using pacman:
+```bash
+sudo pacman -U bingspotany-bin-1.0.0-1-x86_64.pkg.tar.zst
+```
+
+### Ubuntu, Linux Mint & Debian
+Download the `.deb` package and install it using apt:
+```bash
+sudo apt install ./BingSpotAny-1.0.0-amd64.deb
+```
+
+### Fedora & openSUSE
+Download the `.rpm` package and install it using dnf:
+```bash
+sudo dnf install ./BingSpotAny-1.0.0-x86_64.rpm
+```
+
+### Windows
+1. Download the latest `BingSpotAny-Windows-x64.zip` from the [Releases](https://github.com/darkinsun/BingSpotAny/releases) page.
+2. Extract the folder to your preferred location.
+3. Double-click `BingSpotAny.exe` to run. 
+*(Note: If Windows SmartScreen prompts you, click "More info" and "Run anyway".)*
 
 ### macOS
 1. Download the latest `BingSpotAny-macOS-x64.zip` from the [Releases](https://github.com/darkinsun/BingSpotAny/releases) page.
