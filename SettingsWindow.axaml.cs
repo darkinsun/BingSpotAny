@@ -146,7 +146,7 @@ namespace BingSpotAny
                 if (targetTextBox != null)
                 {
                     // Define the absolute path to the local 'scripts' directory
-                    string scriptsDir = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "scripts");
+                    string scriptsDir = System.IO.Path.Combine(WallpaperSettings.GetBaseDataDirectory(), "scripts");
                     
                     if (!System.IO.Directory.Exists(scriptsDir)) 
                     {

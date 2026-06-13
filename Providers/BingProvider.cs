@@ -38,7 +38,7 @@ namespace BingSpotAny.Providers
             var resultList = new List<WallpaperItem>();
 
             // Define user-specific folder paths (e.g., ~/BingSpotAny/Wallpapers/Bing/)
-            string baseDir = AppDomain.CurrentDomain.BaseDirectory;
+            string baseDir = WallpaperSettings.GetBaseDataDirectory();
             string baseFolder = Path.Combine(baseDir, "Wallpapers", "Bing");
             string currentFolder = Path.Combine(baseFolder, "current");
             string archiveFolder = Path.Combine(baseFolder, "archive");

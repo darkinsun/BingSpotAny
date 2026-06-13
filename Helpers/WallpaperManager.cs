@@ -25,8 +25,8 @@ namespace BingSpotAny
             // Do NOT combine it with the app folder.
             if (Path.IsPathRooted(path)) return path;
 
-            // Otherwise, treat it as a relative path inside the application folder
-            return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, path);
+            // Otherwise, treat it as a relative path inside the platform-specific application folder
+            return Path.Combine(WallpaperSettings.GetBaseDataDirectory(), path);
         }
 
         public async Task<bool> ApplyWallpaperAsync(string imagePath)
@@ -34,13 +34,13 @@ namespace BingSpotAny
             string scriptPath = DetermineScriptPath();
             string resolvedScriptPath = ResolvePath(scriptPath);
             
-            Console.WriteLine($"[DEBUG] Çözümlenen Script Yolu: {resolvedScriptPath}");
-            Console.WriteLine($"[DEBUG] Gönderilen Resim Yolu: {imagePath}");
+            Console.WriteLine($"[DEBUG] Resolved Script Path: {resolvedScriptPath}");
+            Console.WriteLine($"[DEBUG] Target Image Path: {imagePath}");
 
             if (string.IsNullOrEmpty(resolvedScriptPath) || !File.Exists(resolvedScriptPath))
             {
                 // Absolute configuration fallback if file missing or empty
-                Console.WriteLine($"[DEBUG] Error: Script file couldn't be found.!");
+                Console.WriteLine($"[DEBUG] Error: Script file couldn't be found!");
                 return false;
             }
 
@@ -97,7 +97,7 @@ namespace BingSpotAny
                 string errorOutput = await process.StandardError.ReadToEndAsync();
                 if (!string.IsNullOrWhiteSpace(errorOutput))
                 {
-                    Console.WriteLine($"\n[macOS DETAILED ERROR] -> {errorOutput}\n");
+                    Console.WriteLine($"\n[DETAILED SCRIPT ERROR] -> {errorOutput}\n");
                 }
                 
                 return process.ExitCode == 0;
@@ -115,7 +115,7 @@ namespace BingSpotAny
             string linuxPath = ResolvePath(_settings.LinuxScriptPath);
             string macPath = ResolvePath(_settings.MacOsScriptPath);
 
-            // Safely create directories if they don't exist based on resolved paths
+            // Safely create user data directories if they don't exist
             string? winDir = Path.GetDirectoryName(winPath);
             if (!string.IsNullOrEmpty(winDir) && !Directory.Exists(winDir)) Directory.CreateDirectory(winDir);
 
@@ -125,43 +125,75 @@ namespace BingSpotAny
             string? macDir = Path.GetDirectoryName(macPath);
             if (!string.IsNullOrEmpty(macDir) && !Directory.Exists(macDir)) Directory.CreateDirectory(macDir);
 
-            // Provision Default Windows Batch File
+            // --- SEED PATTERN: Check the physical installation folder for shipped scripts ---
+            string appBaseDir = AppDomain.CurrentDomain.BaseDirectory;
+
+            // 1. Provision Windows Script
             if (!File.Exists(winPath))
             {
-                string winContent = "@echo off\r\n" +
-                                    ":: Windows native wallpaper backup switcher via PowerShell core\r\n" +
-                                    "powershell -ExecutionPolicy Bypass -Command \"RUNDLL32.EXE user32.dll,UpdatePerUserSystemParameters; SystemParametersInfo 20, 0, '%1', 1\"";
-                File.WriteAllText(winPath, winContent);
+                string shippedWinPath = Path.Combine(appBaseDir, _settings.WindowsScriptPath);
+                if (File.Exists(shippedWinPath))
+                {
+                    File.Copy(shippedWinPath, winPath);
+                }
+                else
+                {
+                    // Fallback if shipped file is missing
+                    string winContent = "@echo off\r\n" +
+                                        ":: Windows native wallpaper backup switcher via PowerShell core\r\n" +
+                                        "powershell -ExecutionPolicy Bypass -Command \"RUNDLL32.EXE user32.dll,UpdatePerUserSystemParameters; SystemParametersInfo 20, 0, '%1', 1\"";
+                    File.WriteAllText(winPath, winContent);
+                }
             }
 
-            // Provision Default Linux Bash File
+            // 2. Provision Linux Script
             if (!File.Exists(linuxPath))
             {
-                string linuxContent = "#!/bin/sh\n" +
-                                      "# Linux wallpaper switcher leveraging Variety engine\n" +
-                                      "variety --set-wallpaper \"$1\"";
-                File.WriteAllText(linuxPath, linuxContent);
-                
-                // Grant executable permissions on Unix systems
+                string shippedLinuxPath = Path.Combine(appBaseDir, _settings.LinuxScriptPath);
+                if (File.Exists(shippedLinuxPath))
+                {
+                    // Copy your 370-line masterpiece!
+                    File.Copy(shippedLinuxPath, linuxPath);
+                }
+                else
+                {
+                    // Fallback if shipped file is missing
+                    string linuxContent = "#!/bin/sh\n" +
+                                          "# Linux wallpaper switcher leveraging Variety engine\n" +
+                                          "variety --set-wallpaper \"$1\"";
+                    File.WriteAllText(linuxPath, linuxContent);
+                }
+
+                // Always ensure it's executable
                 try { Process.Start("chmod", $"+x \"{linuxPath}\"")?.WaitForExit(); } catch { }
             }
 
+            // 3. Provision macOS Script
             if (!File.Exists(macPath))
             {
-                string macContent = "#!/bin/sh\n" +
-                                    "# macOS Wallpaper Switcher for BingSpotAny\n" +
-                                    "# Changes the wallpaper by sending an AppleScript command to System Events.\n\n" +
-                                    "IMAGE_PATH=\"$1\"\n\n" +
-                                    "# Check if the argument is empty\n" +
-                                    "if [ -z \"$IMAGE_PATH\" ]; then\n" +
-                                    "    exit 1\n" +
-                                    "fi\n\n" +
-                                    "# Update the picture of every desktop (supports multi-monitor setups)\n" +
-                                    "osascript -e \"tell application \\\"System Events\\\" to set picture of every desktop to \\\"$IMAGE_PATH\\\"\"";
+                string shippedMacPath = Path.Combine(appBaseDir, _settings.MacOsScriptPath);
+                if (File.Exists(shippedMacPath))
+                {
+                    File.Copy(shippedMacPath, macPath);
+                }
+                else
+                {
+                    // Fallback if shipped file is missing
+                    string macContent = "#!/bin/sh\n" +
+                                        "# macOS Wallpaper Switcher for BingSpotAny\n" +
+                                        "# Changes the wallpaper by sending an AppleScript command to System Events.\n\n" +
+                                        "IMAGE_PATH=\"$1\"\n\n" +
+                                        "# Check if the argument is empty\n" +
+                                        "if [ -z \"$IMAGE_PATH\" ]; then\n" +
+                                        "    exit 1\n" +
+                                        "fi\n\n" +
+                                        "# Update the picture of every desktop (supports multi-monitor setups)\n" +
+                                        "osascript -e \"tell application \\\"System Events\\\" to set picture of every desktop to \\\"$IMAGE_PATH\\\"\"";
 
-                File.WriteAllText(macPath, macContent);
+                    File.WriteAllText(macPath, macContent);
+                }
 
-                // Grant executable permissions on Unix systems (macOS dahil)
+                // Always ensure it's executable
                 try { Process.Start("chmod", $"+x \"{macPath}\"")?.WaitForExit(); } catch { }
             }
         }

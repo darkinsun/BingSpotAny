@@ -7,7 +7,7 @@ namespace BingSpotAny
 {
     public static class SettingsManager
     {
-        private static readonly string SettingsFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "settings.json");
+        private static readonly string SettingsFilePath = Path.Combine(WallpaperSettings.GetBaseDataDirectory(), "settings.json");
         private static readonly JsonSerializerOptions JsonOptions = new() { WriteIndented = true };
 
         public static WallpaperSettings LoadSettings()

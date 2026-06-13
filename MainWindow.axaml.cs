@@ -31,7 +31,7 @@ namespace BingSpotAny
             // Get the active provider directly from the UI
             string providerName = GetSelectedProvider();
 
-            string baseDir = AppDomain.CurrentDomain.BaseDirectory;
+            string baseDir = WallpaperSettings.GetBaseDataDirectory();
             string archivePath = Path.Combine(baseDir, "Wallpapers", providerName,"archive");
 
             SystemOSOpenFolder(archivePath);
@@ -42,7 +42,7 @@ namespace BingSpotAny
             // Get the active provider directly from the UI
             string providerName = GetSelectedProvider();
 
-            string baseDir = AppDomain.CurrentDomain.BaseDirectory;
+            string baseDir = WallpaperSettings.GetBaseDataDirectory();
             string favoritesPath = Path.Combine(baseDir, "Wallpapers", providerName, "favourites");
 
             SystemOSOpenFolder(favoritesPath);

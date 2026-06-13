@@ -28,7 +28,7 @@ namespace BingSpotAny.Providers
         {
             var resultList = new List<WallpaperItem>();
 
-            string baseDir = AppDomain.CurrentDomain.BaseDirectory;
+            string baseDir = WallpaperSettings.GetBaseDataDirectory();
             string baseFolder = Path.Combine(baseDir, "Wallpapers", "SpotLight");
             string currentFolder = Path.Combine(baseFolder, "current");
             string archiveFolder = Path.Combine(baseFolder, "archive");

@@ -8,7 +8,7 @@ using System.IO;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Platform.Storage;
-using Avalonia.Media.Imaging; // Required for bitmap
+using Avalonia.Media.Imaging; 
 using BingSpotAny.Models;
 using BingSpotAny.Providers;
 using System.Windows.Input;
@@ -151,7 +151,7 @@ namespace BingSpotAny.ViewModels
             {
                 Debug.WriteLine("MVVM SUCCESS: Wallpaper applied smoothly via command binding.");
 
-                // Son ayarlanan duvar kağıdını hafızaya al ve JSON dosyasına kaydet
+                // Memorize the last set wallpaper and save it to the JSON file
                 _settings.CurrentWallpaperPath = targetImagePath;
                 SettingsManager.SaveSettings(_settings);
             }
@@ -160,6 +160,7 @@ namespace BingSpotAny.ViewModels
                 Debug.WriteLine("MVVM ERROR: Command execution failed during script runner invocation.");
             }
         }
+        
         private async Task AddToFavouritesAsync()
         {
             if (_currentWallpapers == null || _currentWallpapers.Count == 0 || _currentIndex < 0 || _currentIndex >= _currentWallpapers.Count)
@@ -170,7 +171,7 @@ namespace BingSpotAny.ViewModels
             string fileName = Path.GetFileName(sourcePath);
 
             // Cross-platform portable storage logic
-            string baseDir = AppDomain.CurrentDomain.BaseDirectory;
+            string baseDir = WallpaperSettings.GetBaseDataDirectory();
             string favFolder = Path.Combine(baseDir, "Wallpapers", currentItem.ProviderName, "favourites");
             
             if (!Directory.Exists(favFolder))
@@ -202,7 +203,6 @@ namespace BingSpotAny.ViewModels
                     await customDialog.ShowDialog(mainWindow);
                 }
             }
-            ;
         }
 
         private async Task SaveImageAsAsync()
@@ -252,6 +252,7 @@ namespace BingSpotAny.ViewModels
                 }
             }
         }
+        
         // Navigation Methods (Avalonia can call these methods directly from the buttons)
         public void GoFirst() { _currentIndex = 0; UpdatePreviewImage(); }
         public void GoPrev() { if (_currentIndex > 0) _currentIndex--; UpdatePreviewImage(); }

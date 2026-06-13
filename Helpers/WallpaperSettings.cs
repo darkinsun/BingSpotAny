@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Runtime.InteropServices;
 
 namespace BingSpotAny
 {
@@ -21,7 +22,7 @@ namespace BingSpotAny
         // NEW: Option to save all downloaded wallpapers to the archive folder
         public bool ArchiveAllWallpapers { get; set; } = true; 
         
-       // Watermark Settings
+        // Watermark Settings
         public bool EnableWatermark { get; set; } = true;
         public string WatermarkFontFamily { get; set; } = "sans-serif";
         public int WatermarkFontSize { get; set; } = 18;
@@ -33,10 +34,25 @@ namespace BingSpotAny
         public string AutoChangeTime { get; set; } = "09:00"; // 24-hour format (HH:mm)
         public string DefaultProvider { get; set; } = "Bing";  // "Bing" or "SpotLight"
 
-        //High-precision state tracking (Unix Timestamp in seconds)
+        // High-precision state tracking (Unix Timestamp in seconds)
         public long LastAutoChangeTime { get; set; } = 0; 
         
         // OS Integration
         public bool RunAtStartup { get; set; } = false;
+
+        // --- CROSS-PLATFORM PATH RESOLVER ---
+        // Provides the correct writable directory based on the operating system
+        public static string GetBaseDataDirectory()
+        {
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            {
+                // Windows portable behavior: use the application's executable directory
+                return AppDomain.CurrentDomain.BaseDirectory;
+            }
+            
+            // Linux & macOS behavior: use the user's local data folder (e.g., ~/.local/share/)
+            string systemDataFolder = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+            return Path.Combine(systemDataFolder, "BingSpotAny");
+        }
     }
 }
