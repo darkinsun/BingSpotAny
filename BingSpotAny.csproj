@@ -34,15 +34,13 @@
       <CopyToPublishDirectory>Never</CopyToPublishDirectory>
     </Content>
   </ItemGroup>
-<PropertyGroup Condition="$([MSBuild]::IsOSPlatform('Windows'))">
-    <ApplicationIcon>Assets\icon.ico</ApplicationIcon>
-  </PropertyGroup>
-
-  <ItemGroup Condition="$([MSBuild]::IsOSPlatform('OSX'))">
+<PropertyGroup Condition="'$(RuntimeIdentifier)' == 'win-x64' Or '$(RuntimeIdentifier)' == 'win-x86' Or '$(RuntimeIdentifier)' == 'win-arm64'">
+  <ApplicationIcon>Assets\icon.ico</ApplicationIcon>
+</PropertyGroup>
+<ItemGroup Condition="'$(RuntimeIdentifier)' == 'osx-x64' Or '$(RuntimeIdentifier)' == 'osx-arm64'">
     <None Update="Assets\icon.icns" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
-
-  <ItemGroup Condition="$([MSBuild]::IsOSPlatform('Linux'))">
+<ItemGroup Condition="'$(RuntimeIdentifier)' == 'linux-x64' Or '$(RuntimeIdentifier)' == 'linux-arm64'">
     <None Update="Assets\icon.png" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 </Project>
