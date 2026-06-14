@@ -98,7 +98,6 @@ We welcome community involvement! Here is how you can contribute or get help:
 
 * **Bug Reports:** If you discover a bug or have a concrete feature request, please open an issue in the **[Issues](https://github.com/darkinsun/BingSpotAny/issues)** tab. Include your operating system details and steps to reproduce the problem.
 * **Support & Questions:** Need help with installation, have a general question, or want to share an idea? Please join our community in the **[Discussions](https://github.com/darkinsun/BingSpotAny/discussions)** tab.
-* **Pull Requests:** Contributions to the codebase are highly appreciated. Please ensure you are working on the `dev` branch before submitting a PR.
 
 ---
 
