@@ -67,6 +67,18 @@ sudo dnf install ./BingSpotAny-1.0.0-x86_64.rpm
 2. Extract the archive.
 3. Right-click the extracted application and select **Open** (this is required on the first launch to bypass Gatekeeper).
 
+> **⚠️ Important Note for macOS Users**
+> 
+> Since this application is open-source and not signed with a paid Apple Developer certificate, macOS Gatekeeper may show a warning stating the app *"cannot be opened because the developer cannot be verified"* when you first try to launch it.
+> 
+> To permanently remove this quarantine restriction and allow the app to run smoothly, open your **Terminal** and run the following command (assuming you extracted the app to your Downloads or Applications folder):
+> 
+> ```bash
+> sudo xattr -cr /path/to/BingSpotAny.app
+> ```
+> *(Tip: You can simply type `sudo xattr -cr ` with a trailing space, and then drag & drop the `BingSpotAny.app` file into the terminal window to auto-fill the path, then hit Enter).*
+
+
 ### Build From Source (All Platforms)
 If you prefer to compile the application yourself:
 ```bash
@@ -86,7 +98,6 @@ We welcome community involvement! Here is how you can contribute or get help:
 
 * **Bug Reports:** If you discover a bug or have a concrete feature request, please open an issue in the **[Issues](https://github.com/darkinsun/BingSpotAny/issues)** tab. Include your operating system details and steps to reproduce the problem.
 * **Support & Questions:** Need help with installation, have a general question, or want to share an idea? Please join our community in the **[Discussions](https://github.com/darkinsun/BingSpotAny/discussions)** tab.
-* **Pull Requests:** Contributions to the codebase are highly appreciated. Please ensure you are working on the `dev` branch before submitting a PR.
 
 ---
 
