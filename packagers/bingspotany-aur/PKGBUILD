@@ -1,0 +1,49 @@
+# Maintainer: Mesut <mesutkus@outlook.com>
+pkgname=bingspotany-bin
+pkgver=1.0.0
+pkgrel=1
+pkgdesc="A modern, cross-platform daily wallpaper manager fetching from Bing and Spotlight"
+arch=('x86_64')
+url="https://github.com/darkinsun/BingSpotAny"
+license=('GPL3')
+provides=('bingspotany')
+conflicts=('bingspotany')
+source=("${pkgname}-${pkgver}.tar.gz::${url}/releases/download/v${pkgver}/BingSpotAny-Linux-x64.tar.gz")
+
+# REPLACE THIS WITH YOUR HASH
+sha256sums=('ff685772e93613fd36ea5e7ec14bf83133dd6cb1ff08df5e53a3fe7678ec5799')
+
+# PREVENT BINARY CORRUPTION
+options=('!strip')
+
+package() {
+    # 1. Create standard Linux system directories
+    install -d "${pkgdir}/opt/BingSpotAny"
+    install -d "${pkgdir}/usr/bin"
+    install -d "${pkgdir}/usr/share/applications"
+
+    # 2. Navigate to downloaded source and remove the tarball symlink so it isn't copied
+    cd "${srcdir}"
+    rm -f "${pkgname}-${pkgver}.tar.gz"
+
+    # 3. Copy the self-contained portable files securely into the /opt/ directory
+    cp -r * "${pkgdir}/opt/BingSpotAny/"
+
+    # 4. Ensure the main binary is executable
+    chmod +x "${pkgdir}/opt/BingSpotAny/BingSpotAny"
+
+    # 5. Create a symlink so the user can just type 'bingspotany' in the terminal to launch it
+    ln -s "/opt/BingSpotAny/BingSpotAny" "${pkgdir}/usr/bin/bingspotany"
+
+    # 6. Generate a native Linux Desktop Shortcut (so it appears in their app launcher)
+    cat <<EOF > "${pkgdir}/usr/share/applications/bingspotany.desktop"
+[Desktop Entry]
+Name=BingSpotAny
+Comment=Daily wallpaper manager (Runs in system tray)
+Exec=/usr/bin/bingspotany
+Icon=/opt/BingSpotAny/Assets/icon.png
+Terminal=false
+Type=Application
+Categories=Utility;DesktopSettings;
+EOF
+}

@@ -9,12 +9,14 @@ rm -rf "$DIST_DIR"
 mkdir -p "$DIST_DIR"
 
 echo "📦 1. BUILDING WINDOWS PACKAGE..."
-dotnet publish -c Release -r win-x64 --self-contained true /p:PublishSingleFile=true /p:PublishReadyToRun=true -o "$DIST_DIR/windows_tmp"
+# To overcome some security restrictions, PublishSingleFile has been removed in Windows builds.
+dotnet publish -c Release -r win-x64 --self-contained true /p:PublishReadyToRun=true -o "$DIST_DIR/BingSpotAny-Windows-x64"
+
 # Create the Windows archive
-cd "$DIST_DIR/windows_tmp"
-zip -r "../BingSpotAny-Windows-x64.zip" *
-cd ../..
-rm -rf "$DIST_DIR/windows_tmp"
+cd "$DIST_DIR"
+zip -r "BingSpotAny-Windows-x64.zip" "BingSpotAny-Windows-x64"
+rm -rf "BingSpotAny-Windows-x64"
+cd ..
 
 echo "📦 2. BUILDING LINUX PORTABLE PACKAGE..."
 dotnet publish -c Release -r linux-x64 --self-contained true /p:PublishSingleFile=true -o "$DIST_DIR/BingSpotAny-Linux-x64"

@@ -1,0 +1,19 @@
+name: "bingspotany"
+arch: "amd64"
+platform: "linux"
+version: "1.0.0"
+section: "utils"
+priority: "optional"
+maintainer: "Mesut <mesutkus@outlook.com>"
+description: "A modern, cross-platform daily wallpaper manager fetching from Bing and Spotlight"
+homepage: "https://github.com/darkinsun/BingSpotAny"
+license: "GPL3"
+contents:
+  - src: "./BingSpotAny-Linux-x64/*"
+    dst: "/opt/BingSpotAny/"
+  - src: "./bingspotany.desktop"
+    dst: "/usr/share/applications/bingspotany.desktop"
+  # Symbolic links
+  - src: "/opt/BingSpotAny/BingSpotAny"
+    dst: "/usr/bin/bingspotany"
+    type: symlink
