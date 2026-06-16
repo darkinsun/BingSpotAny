@@ -21,8 +21,14 @@ BingSpotAny seamlessly fetches and applies beautiful daily wallpapers from provi
 
 BingSpotAny is actively developed and tested to ensure stability across various systems, including:
 * **Windows:** Windows 10 (Build 10.0.19041) and later.
-* **Linux:** CachyOS, actively tested on XFCE 4.20 and COSMIC desktop environments.
+* **Linux:** CachyOS, actively tested on XFCE 4.20 desktop environment.
 * **macOS:** Universal compatibility.
+
+### 🐧 Universal Linux Support (Desktop Environment Agnostic)
+No more fragmentation! BingSpotAny is built to work seamlessly across the diverse Linux ecosystem, regardless of your display server (X11 or Wayland) or desktop environment.
+
+* **True Independence:** Works flawlessly on GNOME, KDE Plasma, XFCE, Cinnamon, and even the next-gen COSMIC desktop.
+* **Native Autostart Integration:** Utilizes the Freedesktop.org (XDG Autostart) standard to quietly launch with your system at boot—no manual scripts, symlinks, or `.config` tweaking required.
 
 ---
 
