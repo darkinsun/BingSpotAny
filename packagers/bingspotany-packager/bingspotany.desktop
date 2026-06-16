@@ -1,8 +1,0 @@
-[Desktop Entry]
-Name=BingSpotAny
-Comment=Daily wallpaper manager (Runs in system tray)
-Exec=/usr/bin/bingspotany
-Icon=/opt/BingSpotAny/Assets/icon.png
-Terminal=false
-Type=Application
-Categories=Utility;DesktopSettings;
