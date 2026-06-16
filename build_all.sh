@@ -15,7 +15,6 @@ cd "$DIST_DIR/windows_tmp"
 zip -r "../BingSpotAny-Windows-x64.zip" *
 cd ../..
 rm -rf "$DIST_DIR/windows_tmp"
-cd ..
 
 echo "📦 2. BUILDING LINUX PORTABLE PACKAGE..."
 dotnet publish -c Release -r linux-x64 --self-contained true /p:PublishSingleFile=true -o "$DIST_DIR/BingSpotAny-Linux-x64"
