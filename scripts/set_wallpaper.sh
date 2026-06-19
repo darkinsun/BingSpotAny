@@ -86,8 +86,8 @@ wlroots_set() {
         swaybg -i "$WP" -m fill &
         if [ -n "$PID" ]; then
             sleep 1
-            read -r -a PID <<< "$PID"
-            for each_pid in "${PID[@]}"; do
+            read -r -a PIDS <<< "$PID"
+            for each_pid in "${PIDS[@]}"; do
                 kill "$each_pid" 2>/dev/null
             done
         fi
@@ -267,9 +267,11 @@ elif [ "$DE" == "xfce" ]; then
             else
                 # Fallback: try common property path with --create flag
                 #xfconf-query -c xfce4-desktop -p "/backdrop/screen0/monitor0/workspace0/last-image" -n -t string -s "$WP" 2>/dev/null
-				for monitor in $(xfconf-query -c xfce4-desktop -p /backdrop -l | grep "workspace0$" | cut -d'/' -f4); do
-					xfconf-query -c xfce4-desktop -p "/backdrop/screen0/${monitor}/workspace0/last-image" -n -t string -s "$WP"
-					xfconf-query -c xfce4-desktop -p "/backdrop/screen0/${monitor}/workspace0/image-style" -n -t int -s 5
+				for monitor in $(xfconf-query -c xfce4-desktop -p /backdrop -l 2>/dev/null | grep "workspace0$" | cut -d'/' -f4); do
+					if [ -n "$monitor" ]; then
+					    xfconf-query -c xfce4-desktop -p "/backdrop/screen0/${monitor}/workspace0/last-image" -n -t string -s "$WP" 2>/dev/null
+						xfconf-query -c xfce4-desktop -p "/backdrop/screen0/${monitor}/workspace0/image-style" -n -t int -s 5 2>/dev/null
+				   fi
 				done
 
 			fi
@@ -355,7 +357,7 @@ elif [ "$DE" == "awesome" ]; then
     echo "for s in screen do require(\"gears\").wallpaper.maximized(\"$1\", s) end" | awesome-client
 
 elif [[ "$XDG_CURRENT_DESKTOP" == "COSMIC" ]]; then
-    sed -r --in-place 's,source: Path\(".+"\),source: Path("'"$3"'"),gm' ~/.config/cosmic/com.system76.CosmicBackground/v1/all
+    sed -r --in-place 's,source: Path\(".+"\),source: Path("'"$1"'"),gm' ~/.config/cosmic/com.system76.CosmicBackground/v1/all
 
 else
     # For simple WMs, use either feh or nitrogen
