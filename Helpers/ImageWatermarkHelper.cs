@@ -41,10 +41,10 @@ namespace BingSpotAny
                     IsAntialias = true
                 };
 
-                // 3. Shadow Paint (Siyah kutu yerine zarif bir gölge efekti için)
+                // 3. Shadow Paint (For an elegant shadow effect instead of a black box)
                 using var shadowPaint = new SKPaint
                 {
-                    Color = new SKColor(0, 0, 0, 200), // Yarı saydam siyah gölge
+                    Color = new SKColor(0, 0, 0, 200), // Translucent black shadow
                     IsAntialias = true
                 };
 
@@ -53,7 +53,7 @@ namespace BingSpotAny
                 font.MeasureText(text, out textBounds, paint);
 
                 float margin = 20f;
-                float padding = 10f; // Sadece koordinat hesaplaması için bıraktık
+                float padding = 10f; // Left it for coordinate calculation.
 
                 float x = margin;
                 float y = margin;
@@ -81,10 +81,10 @@ namespace BingSpotAny
                 }
 
 
-                // 4. Önce Gölgeyi Çiz (Sağa ve aşağıya 2 piksel kaydırarak)
+                // 4. First, draw the shadow (shifting 2 pixels to the right and down).
                 canvas.DrawText(text, x + 2, y + 2, font, shadowPaint);
 
-                // 5. Ana Metni Tam Üzerine Çiz
+                //  5. Draw a line directly over the main text.
                 canvas.DrawText(text, x, y, font, paint);
 
                 using var image = SKImage.FromBitmap(bitmap);
