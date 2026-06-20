@@ -1,6 +1,6 @@
 # BingSpotAny
 
-A modern, cross-platform daily wallpaper manager built with **.NET 8.0** and **Avalonia UI**. 
+A modern, cross-platform daily wallpaper manager built with **.NET 10.0** and **Avalonia UI**. 
 
 BingSpotAny seamlessly fetches and applies beautiful daily wallpapers from providers like Bing and Windows Spotlight, bringing fresh backgrounds to your desktop environment every day. 
 

@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e # Exit immediately if a command exits with a non-zero status
 
-VERSION="1.0.0"
+VERSION="1.1.0"
 DIST_DIR="./publish"
 
 echo "🧹 Cleaning previous builds..."

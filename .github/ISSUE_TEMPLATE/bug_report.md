@@ -24,5 +24,5 @@ If applicable, add screenshots, terminal outputs, or log files to help explain y
 **System Information (Please complete the following information):**
 - OS: [e.g. Windows 10, CachyOS, Ubuntu, macOS]
 - Desktop Environment / Window Manager (If Linux): [e.g. XFCE 4.20, COSMIC, Plasma, GNOME]
-- .NET Version: [e.g. .NET 8.0]
-- Application Version: [e.g. v1.0.0]
+- .NET Version: [e.g. .NET 10.0]
+- Application Version: [e.g. v1.1.0]

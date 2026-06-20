@@ -17,7 +17,7 @@
     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="8" Margin="20">
         
         <TextBlock Text="BingSpotAny" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center"/>
-        <TextBlock Text="Version 1.0.0" FontSize="14" Foreground="Gray" HorizontalAlignment="Center"/>
+        <TextBlock Text="Version 1.1.0" FontSize="14" Foreground="Gray" HorizontalAlignment="Center"/>
         
         <TextBlock Text="A cross-platform daily wallpaper manager powered by .NET and Avalonia UI." 
                    TextWrapping="Wrap" TextAlignment="Center" Margin="0,10,0,10"/>
