@@ -1,0 +1,77 @@
+name: Deploy Custom Linux Repositories
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch: # To manually trigger with existing release assets at any time
+
+jobs:
+  build-and-deploy-repos:
+    runs-on: ubuntu-latest
+    steps:
+      # Step 1: Checkout the gh-pages branch (if it exists) to the workspace
+      - name: Checkout gh-pages branch
+        uses: actions/checkout@v4
+        with:
+          ref: gh-pages
+          path: repo-site
+        continue-on-error: true
+
+      # Step 2: Create the necessary directory structures
+      - name: Create directory structure
+        run: |
+          mkdir -p repo-site/debian
+          mkdir -p repo-site/fedora
+          mkdir -p repo-site/arch
+
+      # Step 3: Download existing Release assets directly using GitHub CLI (No compiling!)
+      - name: Download Existing Release Assets
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          TAG_NAME="${{ github.event.release.tag_name }}"
+          if [ -z "$TAG_NAME" ]; then
+            TAG_NAME=$(gh release view -R ${{ github.repository }} --json tagName --template '{{.tagName}}')
+          fi
+          echo "Target Release Tag: $TAG_NAME"
+          
+          # Download the respective extensions to their related folders
+          gh release download "$TAG_NAME" -R ${{ github.repository }} -p "*.deb" -D repo-site/debian --clobber || echo "DEB not found"
+          gh release download "$TAG_NAME" -R ${{ github.repository }} -p "*.rpm" -D repo-site/fedora --clobber || echo "RPM not found"
+          gh release download "$TAG_NAME" -R ${{ github.repository }} -p "*.pkg.tar.zst" -D repo-site/arch --clobber || echo "ZST not found"
+
+      # Step 4: Generate Debian/Ubuntu (APT) Index
+      - name: Generate Debian (APT) Metadata
+        run: |
+          sudo apt-get update && sudo apt-get install -y dpkg-dev
+          cd repo-site/debian
+          dpkg-scanpackages . /dev/null | gzip -9c > Packages.gz
+          
+          # Create a simple Trivial-Repo Release file
+          echo "Archive: stable" > Release
+          echo "Component: main" >> Release
+          echo "Architecture: amd64" >> Release
+
+      # Step 5: Generate Fedora/RHEL (DNF) Index
+      - name: Generate Fedora (RPM) Metadata
+        run: |
+          sudo apt-get install -y createrepo-c
+          cd repo-site/fedora
+          createrepo_c .
+
+      # Step 6: Generate Arch Linux (Pacman) Index via Official Arch Container
+      - name: Generate Arch (Pacman) Metadata via Arch Container
+        run: |
+          docker run --rm -v ${{ github.workspace }}/repo-site/arch:/arch archlinux:latest sh -c "
+            cd /arch && 
+            ls -la &&
+            repo-add bingspotany.db.tar.gz *.pkg.tar.zst
+          "
+
+      # Step 7: Commit and publish the generated index and package structure to the gh-pages branch
+      - name: Deploy Metadata to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./repo-site
+          publish_branch: gh-pages
