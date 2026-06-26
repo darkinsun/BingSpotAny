@@ -47,7 +47,9 @@ BingSpotAny is distributed as a **self-contained** application. You do not need 
 ### Arch Linux & Derivatives (Manjaro, CachyOS, EndeavourOS)
 Add the custom Pacman repository to your system to install the package and receive automatic updates. Run the following universal command in your terminal:
 ```bash
-printf "\n[bingspotany]\nSigLevel = Optional TrustAll\nServer = [https://darkinsun.github.io/BingSpotAny/arch](https://darkinsun.github.io/BingSpotAny/arch)\n" | sudo tee -a /etc/pacman.conf
+printf "\n[bingspotany]\nSigLevel = Optional TrustAll\nServer = https://darkinsun.github.io/BingSpotAny/arch\n" | sudo tee -a /etc/pacman.conf
+```
+```bash
 sudo pacman -Sy bingspotany
 ```
 
@@ -55,16 +57,21 @@ sudo pacman -Sy bingspotany
 Add the official APT repository to install the application and keep it updated seamlessly:
 
 ```bash
-echo "deb [trusted=yes] [https://darkinsun.github.io/BingSpotAny/debian](https://darkinsun.github.io/BingSpotAny/debian) /" | sudo tee /etc/apt/sources.list.d/bingspotany.list && sudo apt update
-sudo apt install bingspotany
+echo "deb [trusted=yes] https://darkinsun.github.io/BingSpotAny/debian /" | sudo tee /etc/apt/sources.list.d/bingspotany.list
+```
+```bash
+sudo apt update && sudo apt install bingspotany
 ```
 
 ### Fedora & openSUSE
 Add the DNF repository configuration to your system and install the package:
 ```bash
-printf "[bingspotany]\nname=BingSpotAny Official Repository\nbaseurl=[https://darkinsun.github.io/BingSpotAny/fedora/](https://darkinsun.github.io/BingSpotAny/fedora/)\nenabled=1\ngpgcheck=0\n" | sudo tee /etc/yum.repos.d/bingspotany.repo
+printf "[bingspotany]\nname=BingSpotAny Official Repository\nbaseurl=https://darkinsun.github.io/BingSpotAny/fedora/\nenabled=1\ngpgcheck=0\n" | sudo tee /etc/yum.repos.d/bingspotany.repo
+```
+```bash
 sudo dnf install bingspotany
 ```
+
 
 ### Windows
 1. Download the latest `BingSpotAny-Windows-x64.zip` from the [Releases](https://github.com/darkinsun/BingSpotAny/releases) page.
