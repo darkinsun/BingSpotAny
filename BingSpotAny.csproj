@@ -7,6 +7,16 @@
     <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
   </PropertyGroup>
 
+  <!-- Memory Management and Garbage Collection Optimizations -->
+  <PropertyGroup>
+    <!-- Switches GC from Server mode to Workstation mode for significantly lower RAM footprint -->
+    <ServerGarbageCollection>false</ServerGarbageCollection>
+    <!-- Enables background garbage collection to maintain UI responsiveness -->
+    <ConcurrentGarbageCollection>true</ConcurrentGarbageCollection>
+    <!-- Forces the runtime to return unused memory back to the OS immediately -->
+    <RetainVMGarbageCollection>false</RetainVMGarbageCollection>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="Avalonia" Version="12.0.4" />
     <PackageReference Include="Avalonia.Controls.ColorPicker" Version="12.0.4" />
