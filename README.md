@@ -36,14 +36,6 @@ No more fragmentation! BingSpotAny is built to work seamlessly across the divers
 
 BingSpotAny is distributed as a **self-contained** application. You do not need to install .NET or any other frameworks to run it!
 
-### Linux (Portable)
-1. Download the latest `BingSpotAny-Linux-x64.tar.gz` from the [Releases](https://github.com/darkinsun/BingSpotAny/releases) page.
-2. Extract the archive to a folder in your home directory (e.g., `~/BingSpotAny`).
-3. Open your terminal in the extracted folder and execute the application:
-```bash
-./BingSpotAny
-```
-
 ### Arch Linux & Derivatives (Manjaro, CachyOS, EndeavourOS)
 Add the custom Pacman repository to your system to install the package and receive automatic updates. Run the following universal command in your terminal:
 ```bash
@@ -72,6 +64,13 @@ printf "[bingspotany]\nname=BingSpotAny Official Repository\nbaseurl=https://dar
 sudo dnf install bingspotany
 ```
 
+### Linux (Portable)
+1. Download the latest `BingSpotAny-Linux-x64.tar.gz` from the [Releases](https://github.com/darkinsun/BingSpotAny/releases) page.
+2. Extract the archive to a folder in your home directory (e.g., `~/BingSpotAny`).
+3. Open your terminal in the extracted folder and execute the application:
+```bash
+./BingSpotAny
+```
 
 ### Windows
 1. Download the latest `BingSpotAny-Windows-x64.zip` from the [Releases](https://github.com/darkinsun/BingSpotAny/releases) page.
