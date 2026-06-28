@@ -318,25 +318,51 @@ namespace BingSpotAny
                 }
                 else if (OperatingSystem.IsLinux())
                 {
-                    // Standard notification daemon execution for Linux environments 
-                    System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
+                    System.Diagnostics.Debug.WriteLine("[NOTIFICATIONS] Target OS: Linux. Preparing notify-send command...");
+                    
+                    var psi = new System.Diagnostics.ProcessStartInfo
                     {
                         FileName = "notify-send",
-                        Arguments = $"\"BingSpotAny\" \"Version {newVersion} is out! Open About in tray menu to update.\" -u normal",
                         CreateNoWindow = true,
                         UseShellExecute = false
-                    });
+                    };
+
+                    // CRITICAL FIX: Use ArgumentList to bypass Unix shell escaping issues.
+                    // Parameter 1: Title
+                    psi.ArgumentList.Add("BingSpotAny Update");
+                    
+                    // Parameter 2: Body
+                    psi.ArgumentList.Add($"Version {newVersion} is out! Open About in tray menu to update.");
+                    
+                    // Parameter 3: Urgency level (-u normal)
+                    psi.ArgumentList.Add("-u");
+                    psi.ArgumentList.Add("normal");
+                    
+                    // Parameter 4: Expire time in milliseconds (-t 5000)
+                    // Explicitly tells the desktop daemon (e.g., xfce4-notifyd, dunst) to show it for 5 seconds
+                    psi.ArgumentList.Add("-t");
+                    psi.ArgumentList.Add("5000");
+
+                    System.Diagnostics.Process.Start(psi);
                 }
-                else if (OperatingSystem.IsMacOS())
+               else if (OperatingSystem.IsMacOS())
                 {
-                    // Standard AppleScript notification trigger
-                    System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
+                    System.Diagnostics.Debug.WriteLine("[NOTIFICATIONS] Target OS: macOS. Preparing osascript command...");
+                    
+                    var psi = new System.Diagnostics.ProcessStartInfo
                     {
                         FileName = "osascript",
-                        Arguments = $"-e 'display notification \"Version {newVersion} is out! Open About in tray menu to update.\" with title \"BingSpotAny\"'",
                         CreateNoWindow = true,
                         UseShellExecute = false
-                    });
+                    };
+
+                    psi.ArgumentList.Add("-e");
+                    psi.ArgumentList.Add($"display notification \"Version {newVersion} is out! Open About in tray menu to update.\" with title \"BingSpotAny\"");
+                    
+                    psi.ArgumentList.Add("-e");
+                    psi.ArgumentList.Add("delay 5");
+
+                    System.Diagnostics.Process.Start(psi);
                 }
             }
             catch (Exception ex)
