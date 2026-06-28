@@ -232,7 +232,7 @@ namespace BingSpotAny
             Task.Run(async () =>
             {
                 System.Diagnostics.Debug.WriteLine("[UPDATE-CHECK] Timer started. Waiting for 1 minute...");
-                await Task.Delay(TimeSpan.FromMinutes(1));
+                await Task.Delay(TimeSpan.FromMinutes(3));
                 System.Diagnostics.Debug.WriteLine("[UPDATE-CHECK] Delay finished. Contacting UpdateChecker...");
 
                 var update = await UpdateChecker.CheckForUpdatesAsync();
@@ -302,8 +302,8 @@ namespace BingSpotAny
                         $notify.BalloonTipText = 'Version " + newVersion + @" is out! Open About in tray menu to update.'
                         $notify.BalloonTipIcon = 'Info'
                         $notify.Visible = $true
-                        $notify.ShowBalloonTip(5000)
-                        Start-Sleep -Seconds 6
+                        $notify.ShowBalloonTip(10000)
+                        Start-Sleep -Seconds 11
                         $notify.Dispose()";
                     
                     // FINAL PRODUCTION SETTINGS:
@@ -341,7 +341,7 @@ namespace BingSpotAny
                     // Parameter 4: Expire time in milliseconds (-t 5000)
                     // Explicitly tells the desktop daemon (e.g., xfce4-notifyd, dunst) to show it for 5 seconds
                     psi.ArgumentList.Add("-t");
-                    psi.ArgumentList.Add("5000");
+                    psi.ArgumentList.Add("10000");
 
                     System.Diagnostics.Process.Start(psi);
                 }
@@ -360,7 +360,7 @@ namespace BingSpotAny
                     psi.ArgumentList.Add($"display notification \"Version {newVersion} is out! Open About in tray menu to update.\" with title \"BingSpotAny\"");
                     
                     psi.ArgumentList.Add("-e");
-                    psi.ArgumentList.Add("delay 5");
+                    psi.ArgumentList.Add("delay 10");
 
                     System.Diagnostics.Process.Start(psi);
                 }

@@ -19,7 +19,7 @@ namespace BingSpotAny
     public static class UpdateChecker
     {
         // Update this manually before every new release
-        public const string CurrentVersion = "1.0.1"; 
+        public const string CurrentVersion = App.AppVersion;
         private const string ApiUrl = "https://api.github.com/repos/darkinsun/BingSpotAny/releases/latest";
 
         public static async Task<GitHubRelease?> CheckForUpdatesAsync()
