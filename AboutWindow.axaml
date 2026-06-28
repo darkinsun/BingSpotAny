@@ -1,9 +1,11 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:BingSpotAny"
         x:Class="BingSpotAny.AboutWindow"
+        x:DataType="local:AboutWindow"
         Title="About BingSpotAny"
         Icon="avares://BingSpotAny/Assets/icon.png"
-        Width="350" Height="360"
+        Width="350" Height="420"
         WindowStartupLocation="CenterScreen"
         CanResize="False"
         ExtendClientAreaToDecorationsHint="True">
@@ -15,10 +17,17 @@
     </Window.Resources>
 
     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="8" Margin="20">
-        
+
         <TextBlock Text="BingSpotAny" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center"/>
-        <TextBlock Text="Version 1.1.0" FontSize="14" Foreground="Gray" HorizontalAlignment="Center"/>
-        
+        <TextBlock Text="{Binding VersionText}" FontSize="14" Foreground="Gray" HorizontalAlignment="Center"/>
+        <StackPanel IsVisible="{Binding IsUpdateAvailable}" HorizontalAlignment="Center" Margin="0,10,0,0">
+            <TextBlock Text="New Version Available!" Foreground="#2ecc71" FontWeight="Bold" HorizontalAlignment="Center"/>
+            <Button Content="Click for new release"
+                    Command="{Binding OpenUpdateLinkCommand}"
+                    Foreground="DodgerBlue"
+                    Background="Transparent"
+                    Cursor="Hand"/>
+        </StackPanel>
         <TextBlock Text="A cross-platform daily wallpaper manager powered by .NET and Avalonia UI." 
                    TextWrapping="Wrap" TextAlignment="Center" Margin="0,10,0,10"/>
         
