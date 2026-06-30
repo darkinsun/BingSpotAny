@@ -45,8 +45,10 @@ printf "\n[bingspotany]\nSigLevel = Optional TrustAll\nServer = https://darkinsu
 sudo pacman -Sy bingspotany
 ```
 
+Note: Due to the ongoing AUR security crisis and the temporary lockdown on new repository registrations, BingSpotAny packges haven't been uploaded to Aur just yet.
+
 ### Ubuntu, Linux Mint & Debian
-Add the official APT repository to install the application and keep it updated seamlessly:
+Add the custom APT repository to install the application and keep it updated seamlessly:
 
 ```bash
 echo "deb [trusted=yes] https://darkinsun.github.io/BingSpotAny/debian /" | sudo tee /etc/apt/sources.list.d/bingspotany.list
@@ -56,7 +58,17 @@ sudo apt update && sudo apt install bingspotany
 ```
 
 ### Fedora & openSUSE
-Add the DNF repository configuration to your system and install the package:
+
+* **Option-1:** Enable the official Copr repository and install BingSpotAny via DNF:
+
+```bash
+sudo dnf copr enable darkinsun/bingspotany
+```
+```bash
+sudo dnf install bingspotany-bin
+```
+
+* **Option-2:** Add the custom DNF repository configuration to your system and install the package:
 ```bash
 printf "[bingspotany]\nname=BingSpotAny Official Repository\nbaseurl=https://darkinsun.github.io/BingSpotAny/fedora/\nenabled=1\ngpgcheck=0\n" | sudo tee /etc/yum.repos.d/bingspotany.repo
 ```
