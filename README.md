@@ -119,6 +119,13 @@ dotnet run
 ```
 
 ---
+## Independent Reviews & Mentions
+
+* **Linux Easy:** BingSpotAny has been independently reviewed on Linux Easy (in Italian):
+
+[Read the article on Linux Easy](https://www.linuxeasy.org/bingspotany-gestore-wallpaper-quotidiani-windows-linux-macos/)
+
+---
 
 ## 🐛 Bug Reports & Support
 
