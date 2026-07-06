@@ -27,8 +27,8 @@ mkdir -p %{buildroot}/opt/BingSpotAny
 mkdir -p %{buildroot}/usr/bin
 mkdir -p %{buildroot}/usr/share/applications
 
-# 2. Copy all files inside the folder to the /opt directory
-cp -r * %{buildroot}/opt/BingSpotAny/
+# 2. Copy all files inside the folder using archive mode to preserve strict permissions
+cp -a * %{buildroot}/opt/BingSpotAny/
 
 # 3. Ensure the main binary is executable
 chmod +x %{buildroot}/opt/BingSpotAny/BingSpotAny
