@@ -1,10 +1,6 @@
 # Natively links Patreon profile
 patreon: darkinsun
 
-# Custom section maps specific crypto networks and addresses
+# Directs cryptocurrency donors straight to your markdown instructions
 custom:
-  - "USDC (BEP20): 0x0f20a2492a312fb563811e23fab4c0a88ea73c47"
-  - "USDT (TRC-20): TU7rU4XckfRiyWsz9EWXCzvwgh8akHzYHW"
-  - "BTC: 15sr9TnsbodPEExNw5nh1pRgqnqDWVx4L3"
-  - "ETH (ERC-20): 0x0f20a2492a312fb563811e23fab4c0a88ea73c47"
-
+  - "https://github.com/darkinsun/BingSpotAny/blob/main/DONATE.md"
