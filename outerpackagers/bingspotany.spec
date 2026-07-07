@@ -1,6 +1,6 @@
 Name:           bingspotany-bin
 Version:        1.1.1
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        A modern, cross-platform daily wallpaper manager
 License:        GPLv3
 URL:            https://github.com/darkinsun/BingSpotAny
@@ -53,3 +53,10 @@ EOF
 /opt/BingSpotAny/
 /usr/bin/bingspotany
 /usr/share/applications/bingspotany.desktop
+
+%changelog
+* Tue Jul 06 2026 darkinsun <42946064+darkinsun@users.noreply.github.com> - 1.1.1-2
+- Fix file permissions and dynamic versioning for Fedora.
+- Standardize 0644/0755 permissions for desktop and binary files.
+- Enforce absolute symlink paths in the spec file.
+- Ensure proper use of archive mode (cp -a) to preserve file metadata.

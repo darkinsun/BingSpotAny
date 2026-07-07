@@ -1,7 +1,7 @@
 pkgbase = bingspotany-bin
 	pkgdesc = A modern, cross-platform daily wallpaper manager fetching from Bing and Spotlight
 	pkgver = 1.1.1
-	pkgrel = 1
+	pkgrel = 2
 	url = https://github.com/darkinsun/BingSpotAny
 	arch = x86_64
 	license = GPL3

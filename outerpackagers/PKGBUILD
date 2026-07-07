@@ -1,7 +1,7 @@
 # Maintainer: darkinsun <42946064+darkinsun@users.noreply.github.com>
 pkgname=bingspotany-bin
 pkgver=1.1.1
-pkgrel=1
+pkgrel=2
 pkgdesc="A modern, cross-platform daily wallpaper manager fetching from Bing and Spotlight"
 arch=('x86_64')
 url="https://github.com/darkinsun/BingSpotAny"
