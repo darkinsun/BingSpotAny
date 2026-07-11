@@ -26,7 +26,7 @@ namespace BingSpotAny
             InitializeComponent();
         }
 
-        // Dışarıdan başlık ve mesaj metni alabileceğimiz özel kurucu metot
+        // A custom method that take arguments (title and text) for message box
         public MessageBox(string title, string message) : this()
         {
             Title = title;
@@ -37,7 +37,7 @@ namespace BingSpotAny
             }
         }
 
-        // Tamam butonuna basılınca pencereyi kapat
+        // Close the window if Ok button is clicked.
         private void CloseButton_Click(object? sender, RoutedEventArgs e)
         {
             this.Close();
