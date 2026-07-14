@@ -37,15 +37,24 @@ No more fragmentation! BingSpotAny is built to work seamlessly across the divers
 BingSpotAny is distributed as a **self-contained** application. You do not need to install .NET or any other frameworks to run it!
 
 ### Arch Linux & Derivatives (Manjaro, CachyOS, EndeavourOS)
-Add the custom Pacman repository to your system to install the package and receive automatic updates. Run the following universal command in your terminal:
+
+* **Option-1:** Install via AUR (Arch User Repository) using your preferred AUR helper:
+```bash
+paru -S bingspotany-bin
+```
+
+Or
+```bash
+yay -S bingspotany-bin
+```
+
+* **Option-2:** Add the custom Pacman repository to your system to install the package and receive automatic updates. Run the following universal command in your terminal:
 ```bash
 printf "\n[bingspotany]\nSigLevel = Optional TrustAll\nServer = https://darkinsun.github.io/BingSpotAny/arch\n" | sudo tee -a /etc/pacman.conf
 ```
 ```bash
 sudo pacman -Sy bingspotany
 ```
-
-Note: Due to the ongoing AUR security crisis and the temporary lockdown on new repository registrations, BingSpotAny packges haven't been uploaded to Aur just yet.
 
 ### Ubuntu, Linux Mint & Debian
 Add the custom APT repository to install the application and keep it updated seamlessly:

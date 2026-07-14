@@ -36,7 +36,7 @@ package() {
     ln -s "/opt/BingSpotAny/BingSpotAny" "${pkgdir}/usr/bin/bingspotany"
 
     # 6. Use install -Dm644 to safely write the desktop file with correct system permissions
-    cat <<EOF > "${pkgdir}/usr/share/applications/bingspotany.desktop"
+    cat <<EOF > "${srcdir}/bingspotany.desktop"
 [Desktop Entry]
 Name=BingSpotAny
 Comment=Daily wallpaper manager (Runs in system tray)
