@@ -30,7 +30,7 @@ namespace BingSpotAny
     public partial class App : Application
     {
         // Global Application Version Variable
-        public const string AppVersion = "1.1.1";
+        public const string AppVersion = "1.1.2";
         private System.Timers.Timer? _autoChangeTimer;
 
         public override void Initialize()

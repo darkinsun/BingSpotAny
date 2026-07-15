@@ -1,6 +1,6 @@
 Name:           bingspotany-bin
-Version:        1.1.1
-Release:        2%{?dist}
+Version:        1.1.2
+Release:        1%{?dist}
 Summary:        A modern, cross-platform daily wallpaper manager
 License:        GPLv3
 URL:            https://github.com/darkinsun/BingSpotAny
@@ -55,8 +55,7 @@ EOF
 /usr/share/applications/bingspotany.desktop
 
 %changelog
-* Tue Jul 06 2026 darkinsun <42946064+darkinsun@users.noreply.github.com> - 1.1.1-2
-- Fix file permissions and dynamic versioning for Fedora.
-- Standardize 0644/0755 permissions for desktop and binary files.
-- Enforce absolute symlink paths in the spec file.
-- Ensure proper use of archive mode (cp -a) to preserve file metadata.
+* Tue Jul 15 2026 darkinsun <42946064+darkinsun@users.noreply.github.com> - 1.1.2-1
+- Upgraded to Avalonia UI 12.1.0: Transitioned from 12.0.4 to the latest 12.1.0 release. This major framework upgrade brings massive rendering performance leaps, enhanced cross-platform stability, and crucial memory layout optimizations.
+- Seamless Wayland Integration: Thanks to Avalonia's automatic platform detection, the application now natively runs under Wayland sessions where available. By bypassing Xwayland overhead automatically, it delivers significantly lower latency, crisper HiDPI rendering, and smoother animations on modern Linux compositors (GNOME, KDE, Hyprland).
+- Improved X11 & Linux Stability: Benefit from enhanced XDND (Drag and Drop) capabilities, more reliable DBus system dialog integrations, and robust window manager communication under traditional X11 desktop environments.
