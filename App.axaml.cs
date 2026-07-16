@@ -31,6 +31,9 @@ namespace BingSpotAny
     {
         // Global Application Version Variable
         public const string AppVersion = "1.1.2";
+
+        // Global Script Version Variable
+        public const string ScriptVersion = "1.1.0";
         private System.Timers.Timer? _autoChangeTimer;
 
         public override void Initialize()

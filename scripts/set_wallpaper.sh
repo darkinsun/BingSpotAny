@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-#
+# ScriptVersion: 1.1.0
 # ==============================================================================
 # ACKNOWLEDGEMENT:
 # This script contains modified code originally adapted from the Variety project.

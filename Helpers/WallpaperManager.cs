@@ -17,6 +17,8 @@
 using System;
 using System.Diagnostics;
 using System.IO;
+using System.IO.Compression;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 
@@ -127,6 +129,49 @@ namespace BingSpotAny
 
         private void EnsureDefaultScriptsExist()
         {
+            string baseDataDir = WallpaperSettings.GetBaseDataDirectory();
+            string scriptsTargetDir = Path.Combine(baseDataDir, "scripts");
+
+            // Check if an update is needed by comparing settings with the script version
+            bool isUpdateNeeded = _settings.ScriptsVersion != App.ScriptVersion;
+
+            if (isUpdateNeeded)
+            {
+                // Backup existing scripts if the directory exists and has files
+                if (Directory.Exists(scriptsTargetDir))
+                {
+                    string[] existingFiles = Directory.GetFiles(scriptsTargetDir, "*", SearchOption.AllDirectories);
+                    if (existingFiles.Length > 0)
+                    {
+                        try
+                        {
+                            string timestamp = DateTime.Now.ToString("yyyyMMdd_HHmmss");
+                            string safeOldVersion = string.IsNullOrWhiteSpace(_settings.ScriptsVersion) || _settings.ScriptsVersion == "0.0.0" 
+                                ? "legacy" 
+                                : _settings.ScriptsVersion;
+                                
+                            string backupZipPath = Path.Combine(baseDataDir, $"scripts_backup_v{safeOldVersion}_{timestamp}.zip");
+
+                            ZipFile.CreateFromDirectory(scriptsTargetDir, backupZipPath);
+                            Console.WriteLine($"[INFO] Old scripts backed up safely to: {backupZipPath}");
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine($"[ERROR] Failed to backup existing scripts: {ex.Message}");
+                        }
+                    }
+
+                    // Delete the directory safely to start fresh with the new version
+                    try { Directory.Delete(scriptsTargetDir, true); } catch { }
+                }
+
+                // Update the settings with the new version and save immediately
+                _settings.ScriptsVersion = App.ScriptVersion;
+                SettingsManager.SaveSettings(_settings);
+            }
+
+            // --- PROVISIONING LOGIC ---
+
             string winPath = ResolvePath(_settings.WindowsScriptPath);
             string linuxPath = ResolvePath(_settings.LinuxScriptPath);
             string macPath = ResolvePath(_settings.MacOsScriptPath);

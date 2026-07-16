@@ -55,6 +55,7 @@ namespace BingSpotAny
         
         // OS Integration
         public bool RunAtStartup { get; set; } = false;
+        public string ScriptsVersion { get; set; } = "0.0.0";
 
         // --- CROSS-PLATFORM PATH RESOLVER ---
         // Provides the correct writable directory based on the operating system
