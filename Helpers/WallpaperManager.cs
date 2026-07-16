@@ -129,16 +129,29 @@ namespace BingSpotAny
 
         private void EnsureDefaultScriptsExist()
         {
+            string appBaseDir = AppDomain.CurrentDomain.BaseDirectory;
             string baseDataDir = WallpaperSettings.GetBaseDataDirectory();
             string scriptsTargetDir = Path.Combine(baseDataDir, "scripts");
+
+            // Normalize paths to safely compare them (removes trailing slashes)
+            string normalizedAppBase = Path.GetFullPath(appBaseDir).TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
+            string normalizedDataDir = Path.GetFullPath(baseDataDir).TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
+
+            // Windows paths are case-insensitive, Unix paths are case-sensitive
+            bool isSameDirectory = string.Equals(
+                normalizedAppBase, 
+                normalizedDataDir, 
+                RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal);
 
             // Check if an update is needed by comparing settings with the script version
             bool isUpdateNeeded = _settings.ScriptsVersion != App.ScriptVersion;
 
             if (isUpdateNeeded)
             {
+                // IMPORTANT: Prevent backup and deletion if running in portable mode (source == target).
+                // Deleting the target directory in portable mode would destroy the shipped default scripts.
                 // Backup existing scripts if the directory exists and has files
-                if (Directory.Exists(scriptsTargetDir))
+                if (!isSameDirectory && Directory.Exists(scriptsTargetDir))
                 {
                     string[] existingFiles = Directory.GetFiles(scriptsTargetDir, "*", SearchOption.AllDirectories);
                     if (existingFiles.Length > 0)
@@ -187,7 +200,6 @@ namespace BingSpotAny
             if (!string.IsNullOrEmpty(macDir) && !Directory.Exists(macDir)) Directory.CreateDirectory(macDir);
 
             // --- SEED PATTERN: Check the physical installation folder for shipped scripts ---
-            string appBaseDir = AppDomain.CurrentDomain.BaseDirectory;
 
             // 1. Provision Windows Script
             if (!File.Exists(winPath))
@@ -199,10 +211,13 @@ namespace BingSpotAny
                 }
                 else
                 {
-                    // Fallback if shipped file is missing
-                    string winContent = "@echo off\r\n" +
-                                        ":: Windows native wallpaper backup switcher via PowerShell core\r\n" +
-                                        "powershell -ExecutionPolicy Bypass -Command \"RUNDLL32.EXE user32.dll,UpdatePerUserSystemParameters; SystemParametersInfo 20, 0, '%1', 1\"";
+                    // Fallback if shipped file is missing: Uses a self-contained PowerShell script
+    // to invoke Windows SystemParametersInfo via P/Invoke.
+    string winContent = "@echo off\r\n" +
+                        "set \"IMAGE_PATH=%~1\"\r\n" +
+                        "if \"%IMAGE_PATH%\"==\"\" exit /b 1\r\n" +
+                        "powershell -ExecutionPolicy Bypass -WindowStyle Hidden -Command \"Add-Type -TypeDefinition 'using System; using System.Runtime.InteropServices; public class Wallpaper { [DllImport(\\\"user32.dll\\\", CharSet=CharSet.Auto)] public static extern int SystemParametersInfo(int uAction, int uParam, string lpvParam, int fuWinIni); public static void Set(string path) { SystemParametersInfo(20, 0, path, 3); } }'; [Wallpaper]::Set('%IMAGE_PATH%')\"";
+
                     File.WriteAllText(winPath, winContent);
                 }
             }
