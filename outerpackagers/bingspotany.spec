@@ -1,5 +1,5 @@
 Name:           bingspotany-bin
-Version:        1.1.3
+Version:        1.1.4
 Release:        1%{?dist}
 Summary:        A modern, cross-platform daily wallpaper manager
 License:        GPLv3
@@ -55,6 +55,5 @@ EOF
 /usr/share/applications/bingspotany.desktop
 
 %changelog
-* Fri Jul 17 2026 darkinsun <42946064+darkinsun@users.noreply.github.com> - 1.1.3-1
-- Bugs fixed: removal of scripts folder for portable version has been prevented. Error in windows fallback .bat file has been resolved.
-- Script versioning has been implemented to properly update new scripts into users folder. Only triggered if script version has been changed.
+* Fri Jul 17 2026 darkinsun <42946064+darkinsun@users.noreply.github.com> - 1.1.4-1
+- Hotfix: Resolved text visibility issues for dark theme users
