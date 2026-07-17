@@ -19,7 +19,7 @@
     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="8" Margin="20">
 
         <TextBlock Text="BingSpotAny" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center"/>
-        <TextBlock Text="{Binding VersionText}" FontSize="14" Foreground="Gray" HorizontalAlignment="Center"/>
+        <TextBlock Text="{Binding VersionText}" FontSize="14" Foreground="{DynamicResource SystemControlForegroundBaseMediumBrush}" HorizontalAlignment="Center"/>
         <StackPanel IsVisible="{Binding IsUpdateAvailable}" HorizontalAlignment="Center" Margin="0,10,0,0">
             <TextBlock Text="New Version Available!" Foreground="#2ecc71" FontWeight="Bold" HorizontalAlignment="Center"/>
             <Button Content="Click for new release"
@@ -58,7 +58,7 @@
             </StackPanel>
         </Button>
         
-        <TextBlock Text="© 2026" FontSize="12" Foreground="Gray" HorizontalAlignment="Center"/>
+        <TextBlock Text="© 2026" FontSize="12" Foreground="{DynamicResource SystemControlForegroundBaseMediumBrush}" HorizontalAlignment="Center"/>
         <Button Content="Close" Width="100" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Click="Close_Click"/>
     </StackPanel>
 </Window>

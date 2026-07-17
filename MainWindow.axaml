@@ -7,8 +7,7 @@ x:DataType="vm:MainWindowViewModel"
 Title="BingSpotAny"
 Icon="avares://BingSpotAny/Assets/icon.png"
 Width="900" Height="540"
-WindowStartupLocation="CenterScreen"
-Background="{StaticResource ThemeBackgroundBrush}">
+WindowStartupLocation="CenterScreen">
 
     <Grid ColumnDefinitions="*, 280" RowDefinitions="*, Auto" Margin="16">
 
@@ -16,7 +15,7 @@ Background="{StaticResource ThemeBackgroundBrush}">
 
             <Border CornerRadius="8"
                     ClipToBounds="True"
-                    Background="#FFE6E6E6">
+                    Background="{DynamicResource SystemControlBackgroundAltHighBrush}">
                 <Image x:Name="WallpaperPreview"
                        Source="{Binding CurrentImage}"
                        Stretch="Uniform" />
@@ -44,7 +43,7 @@ Background="{StaticResource ThemeBackgroundBrush}">
         </StackPanel>
 
         <Border Grid.Row="0" Grid.RowSpan="2" Grid.Column="1"
-                Background="#FFF0F0F0"
+                Background="{DynamicResource SystemControlBackgroundAltHighBrush}"
                 CornerRadius="8"
                 Padding="16">
 
@@ -64,12 +63,11 @@ Background="{StaticResource ThemeBackgroundBrush}">
 
                     <StackPanel Spacing="8">
                         <Button Name="Button1"
+                                Classes="accent"
                                 Content="Set As Wallpaper"
                                 Command="{Binding ApplyWallpaperCommand}"
                                 HorizontalAlignment="Stretch"
                                 HorizontalContentAlignment="Center"
-                                Background="#0078D7"
-                                Foreground="White"
                                 FontWeight="SemiBold"
                                 CornerRadius="4"/>
 
@@ -108,17 +106,14 @@ Background="{StaticResource ThemeBackgroundBrush}">
                     <Button Name="BtnOpenArchive"
                             Click="OpenArchive_Click"
                             Width="40" Height="40"
-                            Background="#E0E0E0"
                             CornerRadius="20"
                             ToolTip.Tip="Open Provider Archive Folder">
-                        <PathIcon Width="18" Height="18" Foreground="#555555"
-                                  Data="M10,4H4C2.89,4 2,4.89 2,6V18C2,19.1 2.89,20 4,20H20C21.1,20 22,19.1 22,18V8C22,6.89 21.1,6 20,6H12L10,4Z"/>
+                        <PathIcon Width="18" Height="18" Data="M10,4H4C2.89,4 2,4.89 2,6V18C2,19.1 2.89,20 4,20H20C21.1,20 22,19.1 22,18V8C22,6.89 21.1,6 20,6H12L10,4Z"/>
                     </Button>
 
                     <Button Name="BtnOpenFavorites"
                             Click="OpenFavorites_Click"
                             Width="40" Height="40"
-                            Background="#E0E0E0"
                             CornerRadius="20"
                             ToolTip.Tip="Open Favorites Folder">
                         <PathIcon Width="18" Height="18" Foreground="#E81123"

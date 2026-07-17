@@ -6,17 +6,16 @@
         Width="460" Height="620"
         WindowStartupLocation="CenterScreen"
         CanResize="False"
-        WindowDecorations="Full"
-        Background="#FFF5F5F7">
+        WindowDecorations="Full">
 
     <Grid RowDefinitions="*, Auto" Margin="16">
         <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto" Padding="0,0,8,0">
             <StackPanel Spacing="16">
 
-                <Border Background="White" CornerRadius="8" Padding="12" BoxShadow="0 2 4 0 #10000000">
+                <Border Background="{DynamicResource SystemControlBackgroundAltHighBrush}" CornerRadius="8" Padding="12" BoxShadow="0 2 4 0 #10000000">
                     <StackPanel Spacing="12">
-                        <TextBlock Text="Automatic Wallpaper" FontWeight="Bold" Foreground="#333333" FontSize="14"/>
-                        <Separator Background="#EEEEEE"/>
+                        <TextBlock Text="Automatic Wallpaper" FontWeight="Bold" FontSize="14"/>
+                        <Separator/>
 
                         <Grid ColumnDefinitions="*, Auto">
                             <TextBlock Grid.Column="0" Text="Run at System Startup" VerticalAlignment="Center"/>
@@ -48,10 +47,10 @@
                     </StackPanel>
                 </Border>
 
-                <Border Background="White" CornerRadius="8" Padding="12" BoxShadow="0 2 4 0 #10000000">
+                <Border Background="{DynamicResource SystemControlBackgroundAltHighBrush}" CornerRadius="8" Padding="12" BoxShadow="0 2 4 0 #10000000">
                     <StackPanel Spacing="12">
-                        <TextBlock Text="Visual Settings" FontWeight="Bold" Foreground="#333333" FontSize="14"/>
-                        <Separator Background="#EEEEEE"/>
+                        <TextBlock Text="Visual Settings" FontWeight="Bold" FontSize="14"/>
+                        <Separator/>
 
                         <Grid ColumnDefinitions="*, Auto">
                             <TextBlock Grid.Column="0" Text="Embed Description (Watermark)" VerticalAlignment="Center" ToolTip.Tip="Draws the image description directly onto the image pixels."/>
@@ -83,16 +82,16 @@
                             <ColorPicker Grid.Column="1" Name="PickerColor" Width="140" />
                         </Grid>
                         
-                        <Border Background="#FFF3CD"
-                                BorderBrush="#FFEEBA"
+                        <!-- Uses semi-transparent colors to look good on both dark and light modes -->
+                        <Border Background="#1AFFC107"
+                                BorderBrush="#4DFFC107"
                                 BorderThickness="1"
                                 CornerRadius="6"
                                 Padding="12,10"
                                 Margin="0,16,0,0">
                             <Grid ColumnDefinitions="Auto, *">
-                                <PathIcon Grid.Column="0" 
+                                <PathIcon Grid.Column="0"
                                           Data="M11,9H13V7H11M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M11,17H13V11H11V17Z"
-                                          Foreground="#856404"
                                           Width="20" Height="20"
                                           VerticalAlignment="Top"
                                           Margin="0,2,10,0"/>
@@ -100,7 +99,6 @@
                                 <TextBlock Grid.Column="1"
                                            TextWrapping="Wrap"
                                            FontSize="13"
-                                           Foreground="#856404"
                                            VerticalAlignment="Center">
                                     <Run FontWeight="SemiBold">Note:</Run> These settings (enable watermark, font, size, color) will only apply to new wallpapers downloaded from now on. Existing images in your archive will not be affected. If you want to test the new settings immediately, you can delete the current images in the 'current' folder of your active provider. Also if you want to archive watermarked versions of current wallpapers, you can manually copy and overwrite these images to archive folder.
                                 </TextBlock>
@@ -109,12 +107,12 @@
                     </StackPanel>
                 </Border>
 
-                <Border Background="White" CornerRadius="8" Padding="12" BoxShadow="0 2 4 0 #10000000">
+                <Border Background="{DynamicResource SystemControlBackgroundAltHighBrush}" CornerRadius="8" Padding="12" BoxShadow="0 2 4 0 #10000000">
                     <StackPanel Spacing="12">
-                        <TextBlock Text="Advanced Scripts" FontWeight="Bold" Foreground="#333333" FontSize="14"/>
-                        <Separator Background="#EEEEEE"/>
+                        <TextBlock Text="Advanced Scripts" FontWeight="Bold" FontSize="14"/>
+                        <Separator/>
 
-                        <TextBlock Text="Operating System Integrations" FontWeight="SemiBold" FontSize="12" Foreground="#666666" Margin="0,0,0,4"/>
+                        <TextBlock Text="Operating System Integrations" FontWeight="SemiBold" FontSize="12" Opacity="0.7" Margin="0,0,0,4"/>
 
                         <Grid ColumnDefinitions="*, Auto, Auto">
                             <TextBlock Grid.Column="0" Text="Linux Script (.sh)" VerticalAlignment="Center"/>
@@ -140,8 +138,8 @@
                             <Button Grid.Column="2" Content="..." Tag="TxtCustomScript" Click="BrowseScript_Click" Width="30" HorizontalContentAlignment="Center"/>
                         </Grid>
 
-                        <Separator Background="#EEEEEE"/>
-                        <TextBlock Text="Post-Execution Hooks" FontWeight="SemiBold" FontSize="12" Foreground="#666666" Margin="0,0,0,4"/>
+                        <Separator/>
+                        <TextBlock Text="Post-Execution Hooks" FontWeight="SemiBold" FontSize="12" Opacity="0.7" Margin="0,0,0,4"/>
 
                         <Grid ColumnDefinitions="*, Auto">
                             <TextBlock Grid.Column="0" Text="Enable Post-Script" VerticalAlignment="Center" ToolTip.Tip="Runs a secondary script after the wallpaper is successfully applied."/>
@@ -161,8 +159,8 @@
         </ScrollViewer>
 
         <Grid Grid.Row="1" ColumnDefinitions="*, *" Margin="0,16,0,0">
-            <Button Grid.Column="0" Content="Cancel" Click="Cancel_Click" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Background="#FFE0E0E0" Foreground="#333333" Margin="0,0,6,0"/>
-            <Button Grid.Column="1" Content="Save" Click="Save_Click" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Background="#0078D7" Foreground="White" Margin="6,0,0,0"/>
+           <Button Grid.Column="0" Content="Cancel" Click="Cancel_Click" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="0,0,6,0"/>
+           <Button Grid.Column="1" Classes="accent" Content="Save" Click="Save_Click" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="6,0,0,0"/>
         </Grid>
     </Grid>
 </Window>

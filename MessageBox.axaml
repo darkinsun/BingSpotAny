@@ -4,23 +4,20 @@
         Title="Bilgi" 
         Width="450" Height="200"
         WindowStartupLocation="CenterOwner"
-        CanResize="False"
-        Background="#FFF0F0F0">
+        CanResize="False">
     
     <StackPanel Margin="20" Spacing="20" HorizontalAlignment="Center" VerticalAlignment="Center">
-        <TextBlock Name="MessageText" 
-                   TextWrapping="Wrap" 
-                   TextAlignment="Center" 
-                   FontSize="14" 
-                   Foreground="#333333"/>
-        
-        <Button Content="Tamam" 
+        <TextBlock Name="MessageText"
+                   TextWrapping="Wrap"
+                   TextAlignment="Center"
+                   FontSize="14"/>
+
+        <Button Content="Ok"
+                Classes="accent"
                 Click="CloseButton_Click"
-                Width="100" 
-                HorizontalAlignment="Center" 
+                Width="100"
+                HorizontalAlignment="Center"
                 HorizontalContentAlignment="Center"
-                Background="#0078D7" 
-                Foreground="White"
                 CornerRadius="4"/>
     </StackPanel>
 </Window>
