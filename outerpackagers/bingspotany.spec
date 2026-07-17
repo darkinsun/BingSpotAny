@@ -1,5 +1,5 @@
 Name:           bingspotany-bin
-Version:        1.1.2
+Version:        1.1.3
 Release:        1%{?dist}
 Summary:        A modern, cross-platform daily wallpaper manager
 License:        GPLv3
@@ -55,7 +55,6 @@ EOF
 /usr/share/applications/bingspotany.desktop
 
 %changelog
-* Tue Jul 15 2026 darkinsun <42946064+darkinsun@users.noreply.github.com> - 1.1.2-1
-- Upgraded to Avalonia UI 12.1.0: Transitioned from 12.0.4 to the latest 12.1.0 release. This major framework upgrade brings massive rendering performance leaps, enhanced cross-platform stability, and crucial memory layout optimizations.
-- Seamless Wayland Integration: Thanks to Avalonia's automatic platform detection, the application now natively runs under Wayland sessions where available. By bypassing Xwayland overhead automatically, it delivers significantly lower latency, crisper HiDPI rendering, and smoother animations on modern Linux compositors (GNOME, KDE, Hyprland).
-- Improved X11 & Linux Stability: Benefit from enhanced XDND (Drag and Drop) capabilities, more reliable DBus system dialog integrations, and robust window manager communication under traditional X11 desktop environments.
+* Fri Jul 17 2026 darkinsun <42946064+darkinsun@users.noreply.github.com> - 1.1.3-1
+- Bugs fixed: removal of scripts folder for portable version has been prevented. Error in windows fallback .bat file has been resolved.
+- Script versioning has been implemented to properly update new scripts into users folder. Only triggered if script version has been changed.
