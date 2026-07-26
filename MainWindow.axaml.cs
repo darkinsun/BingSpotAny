@@ -28,20 +28,8 @@ namespace BingSpotAny
         public MainWindow()
         {
             InitializeComponent();
-
-            // Listen for window closing request (pressing the X key)
-            // Closing += MainWindow_Closing;
         }
 
-   /*      private void MainWindow_Closing(object? sender, CancelEventArgs e)
-        {
-            // Cancel closing request.
-            e.Cancel = true;
-
-            // Hide the window (Tray icon continues to run in the background)
-            this.Hide();
-        }
- */
         private void OpenArchive_Click(object? sender, RoutedEventArgs e)
         {
             // Get the active provider directly from the UI

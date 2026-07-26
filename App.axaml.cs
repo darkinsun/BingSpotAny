@@ -30,7 +30,7 @@ namespace BingSpotAny
     public partial class App : Application
     {
         // Global Application Version Variable
-        public const string AppVersion = "1.1.4";
+        public const string AppVersion = "1.1.5";
 
         // Global Script Version Variable
         public const string ScriptVersion = "1.1.0";
@@ -127,16 +127,15 @@ namespace BingSpotAny
                 MaxItems = 3
             };
 
-            // TRAY APP BEST PRACTICE: Do not destroy the window on close. Hide it instead.
-            desktop.MainWindow.Closing += (s, e) =>
+            // LINUX/XFCE FIX: Allow the window to be completely destroyed when closed.
+            // Since ShutdownMode is set to OnExplicitShutdown, the Tray Icon and background timers
+            // will keep the application process alive perfectly.
+            desktop.MainWindow.Closed += (s, e) =>
             {
-                e.Cancel = true; // Abort the actual destruction of the window
-
-                var win = (Avalonia.Controls.Window)s!;
-                // CRITICAL FIX: Pushing the Hide command to the next UI thread cycle 
-                // prevents the OS close-loop from clashing with Avalonia's visibility state,
-                // eliminating the "ghost window" or "double-click to hide" bug.
-                Avalonia.Threading.Dispatcher.UIThread.Post(() => win.Hide());
+                // Clear references gracefully. 
+                // Next time the Tray Icon is clicked, ShowMainWindow() will create a fresh instance.
+                desktop.MainWindow = null;
+                NotificationManager = null;
             };
 
             desktop.MainWindow.Show();
@@ -172,7 +171,14 @@ namespace BingSpotAny
 
         private void Exit_Click(object? sender, EventArgs e)
         {
-            Environment.Exit(0);
+            if (Current?.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+            {
+                desktop.Shutdown(); // Avalonia's safe and clean shutdown command
+            }
+            else
+            {
+                Environment.Exit(0);
+            }
         }
 
         // --- BACKGROUND TIMER ENGINE ---

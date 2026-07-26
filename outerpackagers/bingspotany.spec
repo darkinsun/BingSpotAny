@@ -1,5 +1,5 @@
 Name:           bingspotany-bin
-Version:        1.1.4
+Version:        1.1.5
 Release:        1%{?dist}
 Summary:        A modern, cross-platform daily wallpaper manager
 License:        GPLv3
@@ -55,5 +55,7 @@ EOF
 /usr/share/applications/bingspotany.desktop
 
 %changelog
-* Fri Jul 17 2026 darkinsun <42946064+darkinsun@users.noreply.github.com> - 1.1.4-1
-- Hotfix: Resolved text visibility issues for dark theme users
+* Sun Jul 26 2026 darkinsun <42946064+darkinsun@users.noreply.github.com> - 1.1.5-1
+- Remove the Closing event handler that cancelled window destruction (e.Cancel = true), which caused DBus timeouts and session manager errors during system logout/shutdown.
+- Implement a Closed event handler to gracefully clear desktop.MainWindow and NotificationManager references.
+- Update Exit_Click to utilize desktop.Shutdown() for a cleaner application exit sequence.
