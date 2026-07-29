@@ -13,6 +13,9 @@ BingSpotAny seamlessly fetches and applies beautiful daily wallpapers from provi
 * **Truly Cross-Platform:** Runs natively on Windows, Linux, and macOS.
 * **Multiple Providers:** Choose between Bing's daily images or Windows Spotlight curations.
 * **Auto-Start Integration:** Silently boots with your OS (utilizes Registry on Windows, `.desktop` on Linux, and `launchd` on macOS).
+* **Smart Watermarking:** Elegantly embeds the wallpaper’s description, location, or custom text onto the image, with full control over typography, sizes, and colors.
+* **Automation & Timers:** Automatically triggers a background refresh at a specific time of your choice (e.g., every morning at 09:00).
+* **System Tray Integration:** Zero CPU/RAM bloat; it operates quietly in the background as a native tray menu.
 * **Single-Instance Lock:** Prevents multiple background processes from draining your system resources.
 * **Favorites & Archive:** Easily save your favorite daily wallpapers to a dedicated folder.
 * **Modern UI:** Clean, responsive, and resource-friendly interface powered by Avalonia UI.
@@ -25,7 +28,7 @@ BingSpotAny is actively developed and tested to ensure stability across various 
 * **macOS:** Universal compatibility.
 
 ### 🐧 Universal Linux Support (Desktop Environment Agnostic)
-No more fragmentation! BingSpotAny is built to work seamlessly across the diverse Linux ecosystem, regardless of your display server (X11 or Wayland) or desktop environment.
+No more fragmentation. BingSpotAny is built to work seamlessly across the diverse Linux ecosystem, regardless of your display server (X11 or Wayland) or desktop environment.
 
 * **True Independence:** Works flawlessly on GNOME, KDE Plasma, XFCE, Cinnamon, and even the next-gen COSMIC desktop.
 * **Native Autostart Integration:** Utilizes the Freedesktop.org (XDG Autostart) standard to quietly launch with your system at boot—no manual scripts, symlinks, or `.config` tweaking required.
@@ -34,7 +37,7 @@ No more fragmentation! BingSpotAny is built to work seamlessly across the divers
 
 ## 🚀 Installation
 
-BingSpotAny is distributed as a **self-contained** application. You do not need to install .NET or any other frameworks to run it!
+BingSpotAny is distributed as a **self-contained** application. You do not need to install .NET or any other frameworks to run it.
 
 ### Arch Linux & Derivatives (Manjaro, CachyOS, EndeavourOS)
 
@@ -138,7 +141,7 @@ dotnet run
 
 ## 🐛 Bug Reports & Support
 
-We welcome community involvement! Here is how you can contribute or get help:
+We welcome community involvement. Here is how you can contribute or get help:
 
 * **Bug Reports:** If you discover a bug or have a concrete feature request, please open an issue in the **[Issues](https://github.com/darkinsun/BingSpotAny/issues)** tab. Include your operating system details and steps to reproduce the problem.
 * **Support & Questions:** Need help with installation, have a general question, or want to share an idea? Please join our community in the **[Discussions](https://github.com/darkinsun/BingSpotAny/discussions)** tab.
@@ -155,6 +158,6 @@ This project is licensed under the **GNU General Public License v3.0 (GPLv3)**. 
 
 ## ☕ Support the Project
 
-BingSpotAny is an open-source project distributed for free. If you find it useful and want to support its continued development, you can buy me a coffee!
+BingSpotAny is an open-source project distributed for free. If you find it useful and want to support its continued development, you can buy me a coffee.
 
 Please visit the **[DONATE](DONATE.md)** page for details on how to support the project via Patreon or direct Cryptocurrency transfers.
