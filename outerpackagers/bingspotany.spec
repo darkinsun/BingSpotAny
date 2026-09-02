@@ -1,5 +1,5 @@
 Name:           bingspotany-bin
-Version:        1.1.5
+Version:        1.1.6
 Release:        1%{?dist}
 Summary:        A modern, cross-platform daily wallpaper manager
 License:        GPLv3
@@ -55,7 +55,7 @@ EOF
 /usr/share/applications/bingspotany.desktop
 
 %changelog
-* Sun Jul 26 2026 darkinsun <42946064+darkinsun@users.noreply.github.com> - 1.1.5-1
-- Remove the Closing event handler that cancelled window destruction (e.Cancel = true), which caused DBus timeouts and session manager errors during system logout/shutdown.
-- Implement a Closed event handler to gracefully clear desktop.MainWindow and NotificationManager references.
-- Update Exit_Click to utilize desktop.Shutdown() for a cleaner application exit sequence.
+* Wed Sep 02 2026 darkinsun <42946064+darkinsun@users.noreply.github.com> - 1.1.6-1
+- Upgrade Avalonia UI framework to 12.1.2 (includes cumulative 12.1.1 and 12.1.2 DBus, memory leak, and system tray fixes).
+- Refine wallpaper handling logic in set_wallpaper.sh for better COSMIC Desktop compatibility.
+- Fix xdg-open path escaping and multi-monitor scaling factor handling under Linux environments.

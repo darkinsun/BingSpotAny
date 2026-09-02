@@ -36,7 +36,7 @@ namespace BingSpotAny.Providers
         {
             _httpClient = new HttpClient();
             // We use a full Linux/Firefox identity (User-Agent) to bypass firewalls
-            _httpClient.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (X11; Linux x86_64; rv:152.0.3) Gecko/20100101 Firefox/152.0.3");
+            _httpClient.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (X11; Linux x86_64; rv:154.0.1) Gecko/20100101 Firefox/154.0.1");
             _httpClient.DefaultRequestHeaders.Add("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
         }
 

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# ScriptVersion: 1.1.0
+# ScriptVersion: 1.1.1
 # ==============================================================================
 # ACKNOWLEDGEMENT:
 # This script contains modified code originally adapted from the Variety project.
@@ -371,7 +371,13 @@ elif [ "$DE" == "awesome" ]; then
     echo "for s in screen do require(\"gears\").wallpaper.maximized(\"$1\", s) end" | awesome-client
 
 elif [[ "$XDG_CURRENT_DESKTOP" == "COSMIC" ]]; then
-    sed -r --in-place 's,source: Path\(".+"\),source: Path("'"$1"'"),gm' ~/.config/cosmic/com.system76.CosmicBackground/v1/all
+    # $WP includes clock/quotes overlays; $3 is the original image without them.
+    # Also replace Color(...) so solid-color backgrounds become an image path.
+    COSMIC_BG="$HOME/.config/cosmic/com.system76.CosmicBackground/v1/all"
+    sed -r --in-place \
+        -e 's,source: Path\(".+"\),source: Path("'"$WP"'"),gm' \
+        -e 's,source: Color\(.+\),source: Path("'"$WP"'"),gm' \
+        "$COSMIC_BG"
 
 else
     # For simple WMs, use either feh or nitrogen
