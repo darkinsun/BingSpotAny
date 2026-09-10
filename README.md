@@ -133,9 +133,11 @@ dotnet run
 ---
 ## Independent Reviews & Mentions
 
-* **Linux Easy:** BingSpotAny has been independently reviewed on Linux Easy (in Italian):
+* **openEuler Community on CSDN:** BingSpotAny was independently reviewed and featured by the official openEuler Linux community channel on CSDN (in Chinese). The review highlights its lightweight footprint, ad-free experience, privacy-focused design, and GPL-3.0 open-source architecture, alongside step-by-step installation guides for openEuler, Ubuntu, Arch, Fedora, and openSUSE:
+  * [Read the article on CSDN](https://openeuler.csdn.net/6a8864e4662f9a54cb9f4746.html)
 
-[Read the article on Linux Easy](https://www.linuxeasy.org/bingspotany-gestore-wallpaper-quotidiani-windows-linux-macos/)
+* **Linux Easy:** BingSpotAny has been independently reviewed on Linux Easy (in Italian):
+  * [Read the article on Linux Easy](https://www.linuxeasy.org/bingspotany-gestore-wallpaper-quotidiani-windows-linux-macos/)
 
 ---
 
