@@ -28,8 +28,8 @@
                         </Grid>
 
                         <Grid ColumnDefinitions="*, Auto">
-                            <TextBlock Grid.Column="0" Text="Change Time (HH:MM)" VerticalAlignment="Center"/>
-                            <TextBox Grid.Column="1" Name="TxtAutoTime" Width="140" PlaceholderText="09:00" TextAlignment="Center"/>
+                            <TextBlock Grid.Column="0" Text="Change Time" VerticalAlignment="Center"/>
+                            <TimePicker Grid.Column="1" Name="TimePickerAutoTime" Width="140" ClockIdentifier="24HourClock"/>
                         </Grid>
 
                         <Grid ColumnDefinitions="*, Auto">

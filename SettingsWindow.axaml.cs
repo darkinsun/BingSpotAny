@@ -61,13 +61,19 @@ namespace BingSpotAny
                     if (toggleStartup != null) toggleStartup.IsChecked = true;
                 }
             }
-            
+
             // Automation Settings
             var toggleAuto = this.FindControl<ToggleSwitch>("ToggleAutoChange");
             if (toggleAuto != null) toggleAuto.IsChecked = _settings.AutoChangeEnabled;
 
-            var txtTime = this.FindControl<TextBox>("TxtAutoTime");
-            if (txtTime != null) txtTime.Text = _settings.AutoChangeTime;
+            var timePicker = this.FindControl<TimePicker>("TimePickerAutoTime");
+            if (timePicker != null)
+            {
+                if (TimeSpan.TryParse(_settings.AutoChangeTime, out TimeSpan parsedTime))
+                    timePicker.SelectedTime = parsedTime;
+                else
+                    timePicker.SelectedTime = new TimeSpan(9, 0, 0);
+            }
 
             var comboProvider = this.FindControl<ComboBox>("ComboProvider");
             if (comboProvider != null) comboProvider.SelectedIndex = _settings.DefaultProvider == "SpotLight" ? 1 : 0;
@@ -190,8 +196,17 @@ namespace BingSpotAny
         {
             // Automation Settings
             _settings.AutoChangeEnabled = this.FindControl<ToggleSwitch>("ToggleAutoChange")?.IsChecked ?? false;
-            _settings.AutoChangeTime = this.FindControl<TextBox>("TxtAutoTime")?.Text ?? "09:00";
             _settings.RunAtStartup = this.FindControl<ToggleSwitch>("ToggleStartup")?.IsChecked ?? false;
+
+            var timePicker = this.FindControl<TimePicker>("TimePickerAutoTime");
+            if (timePicker != null && timePicker.SelectedTime.HasValue)
+            {
+                _settings.AutoChangeTime = timePicker.SelectedTime.Value.ToString(@"hh\:mm");
+            }
+            else
+            {
+                _settings.AutoChangeTime = "09:00";
+            }
 
             if (this.FindControl<ComboBox>("ComboProvider")?.SelectedItem is ComboBoxItem providerItem)
             {
