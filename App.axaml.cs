@@ -30,7 +30,7 @@ namespace BingSpotAny
     public partial class App : Application
     {
         // Global Application Version Variable
-        public const string AppVersion = "1.1.7";
+        public const string AppVersion = "1.1.8";
 
         // Global Script Version Variable
         public const string ScriptVersion = "1.1.1";

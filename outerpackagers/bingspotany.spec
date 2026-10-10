@@ -1,5 +1,5 @@
 Name:           bingspotany-bin
-Version:        1.1.7
+Version:        1.1.8
 Release:        1%{?dist}
 Summary:        A modern, cross-platform daily wallpaper manager
 License:        GPLv3
@@ -55,6 +55,5 @@ EOF
 /usr/share/applications/bingspotany.desktop
 
 %changelog
-* Tue Sep 22 2026 darkinsun <42946064+darkinsun@users.noreply.github.com> - 1.1.7-1
-- Upgrade Avalonia UI framework to 12.1.3 (includes critical Linux DBus tray icon crash fixes, HiDPI scaling, and UI lifecycle improvements).
-- Replace plain TextBox with TimePicker in Settings for strict time format validation and crash prevention.
+* Tue Oct 10 2026 darkinsun <42946064+darkinsun@users.noreply.github.com> - 1.1.8-1
+- Upgrade Avalonia UI framework to 12.1.4 (includes critical Button/MenuItem memory leak fixes, Windows tray screen info fixes, and Wayland AppId support).
