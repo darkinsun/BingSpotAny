@@ -30,13 +30,13 @@ namespace BingSpotAny.Providers
         private static readonly HttpClient _httpClient;
 
         // We will directly read the public RSS feed of the community archive.
-        private const string RssUrl = "https://windows10spotlight.com/feed";
+        private const string HomeUrl = "https://windows10spotlight.com/";
 
         static SpotlightProvider()
         {
             _httpClient = new HttpClient();
             // We use a full Linux/Firefox identity (User-Agent) to bypass firewalls
-            _httpClient.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (X11; Linux x86_64; rv:157.0.1) Gecko/20100101 Firefox/157.0.1");
+            _httpClient.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (X11; Linux x86_64; rv:159.0) Gecko/20100101 Firefox/159.0");
             _httpClient.DefaultRequestHeaders.Add("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
         }
 
@@ -59,55 +59,57 @@ namespace BingSpotAny.Providers
 
             try
             {
-                Debug.WriteLine("Reading the RSS feed of the free archive...");
-                
+                Debug.WriteLine("Scraping the homepage of windows10spotlight.com directly...");
+
                 // Download RSS XML data as raw text
-                string rssContent = await _httpClient.GetStringAsync(RssUrl);
+                string htmlContent = await _httpClient.GetStringAsync(HomeUrl);
 
                 // Regex to extract <item> blocks in XML
-                var itemRegex = new Regex(@"<item>(.*?)</item>", RegexOptions.Singleline);
-                var items = itemRegex.Matches(rssContent);
+                var articleRegex = new Regex(@"<article\b[^>]*>(.*?)</article>", RegexOptions.Singleline);
+                var articles = articleRegex.Matches(htmlContent);
 
                 int count = 0;
-                foreach (Match itemMatch in items)
+                var processedUrls = new HashSet<string>();
+
+                foreach (Match articleMatch in articles)
                 {
-                    if (count >= 8) break; // Take only the last 8 images to avoid bloating the interface
+                    if (count >= 8) break; // Take only the last 8 images
 
-                    string itemXml = itemMatch.Groups[1].Value;
+                    string articleHtml = articleMatch.Groups[1].Value;
 
-                    // Extract Title (Description text)
                     string description = "Windows Spotlight Image";
-                    var titleMatch = Regex.Match(itemXml, @"<title>(.*?)</title>");
+                    var titleMatch = Regex.Match(articleHtml, @"<span class=""entry-title hidden"">(.*?)</span>");
                     if (titleMatch.Success)
                     {
-                        // Clear CDATA blocks and HTML special characters (e.g. &)
-                        description = titleMatch.Groups[1].Value.Replace("<![CDATA[", "").Replace("]]>", "").Trim();
+                        description = titleMatch.Groups[1].Value.Trim();
                         description = System.Net.WebUtility.HtmlDecode(description);
                     }
 
-                    // Scrape high-resolution JPG URL from XML (wp-content/uploads/YYYY/MM/... format)
-                    var urlMatch = Regex.Match(itemXml, @"(https://windows10spotlight\.com/wp-content/uploads/\d{4}/\d{2}/[^""'\s]+?\.jpg)");
-                    
+                    var urlMatch = Regex.Match(articleHtml, @"(https://windows10spotlight\.com/wp-content/uploads/\d{4}/\d{2}/[^""'\s]+?\.jpg)");
+
                     if (urlMatch.Success)
                     {
                         string imageUrl = urlMatch.Groups[1].Value;
-                        
                         // WordPress sometimes gives thumbnails of images (eg: image-1024x576.jpg).
                         // To download the original quality, we use Regex to remove those size extensions.
                         imageUrl = Regex.Replace(imageUrl, @"-\d+x\d+(?=\.jpg$)", "");
+
+                        // Prevent duplicate processing of thumbnails/originals in the same article block
+                        if (processedUrls.Contains(imageUrl)) continue;
+                        processedUrls.Add(imageUrl);
 
                         Uri uri = new Uri(imageUrl);
                         string fileName = Path.GetFileName(uri.LocalPath);
 
                         string localCurrentPath = Path.Combine(currentFolder, fileName);
                         string localArchivePath = Path.Combine(archiveFolder, fileName);
-                        
+
                         downloadedFileNames.Add(fileName);
 
                         if (!File.Exists(localCurrentPath))
                         {
                             byte[] imageBytes = await _httpClient.GetByteArrayAsync(imageUrl);
-                            
+
                             // If it's enabled in the settings, click Watermark.
                             if (currentSettings.EnableWatermark)
                             {
@@ -128,7 +130,7 @@ namespace BingSpotAny.Providers
                             Description = description,
                             ProviderName = "SpotLight"
                         });
-                        
+
                         count++;
                     }
                 }

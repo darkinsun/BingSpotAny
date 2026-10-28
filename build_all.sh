@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e # Exit immediately if a command exits with a non-zero status
 
-VERSION="1.1.8"
+VERSION="1.1.9"
 DIST_DIR="./publish"
 
 echo "🧹 Cleaning previous builds..."
@@ -9,7 +9,7 @@ rm -rf "$DIST_DIR"
 mkdir -p "$DIST_DIR"
 
 echo "📦 1. BUILDING WINDOWS PACKAGE..."
-dotnet publish -c Release -r win-x64 --self-contained true /p:PublishSingleFile=true /p:PublishReadyToRun=true -o "$DIST_DIR/windows_tmp"
+dotnet publish -c Release -r win-x64 --self-contained true /p:PublishSingleFile=true -o "$DIST_DIR/windows_tmp"
 # Create the Windows archive
 cd "$DIST_DIR/windows_tmp"
 zip -r "../BingSpotAny-Windows-x64.zip" *
