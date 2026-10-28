@@ -31,7 +31,7 @@ BingSpotAny is actively developed and tested to ensure stability across various 
 No more fragmentation. BingSpotAny is built to work seamlessly across the diverse Linux ecosystem, regardless of your display server (X11 or Wayland) or desktop environment.
 
 * **True Independence:** Works flawlessly on GNOME, KDE Plasma, XFCE, Cinnamon, and even the next-gen COSMIC desktop.
-* **Native Autostart Integration:** Utilizes the Freedesktop.org (XDG Autostart) standard to quietly launch with your system at boot—no manual scripts, symlinks, or `.config` tweaking required.
+* **Native Autostart Integration:** Utilizes the Freedesktop.org (XDG Autostart) standard to quietly launch with your system at boot, no manual scripts, symlinks, or `.config` tweaking is required.
 
 ---
 
