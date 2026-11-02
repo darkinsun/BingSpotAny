@@ -17,12 +17,18 @@ jobs:
           path: repo-site
         continue-on-error: true
 
-      # Step 2: Create the necessary directory structures
-      - name: Create directory structure
+      # Step 2: Create the necessary directory structures & Clean up old packages/metadata
+      - name: Clean old packages and create structure
         run: |
           mkdir -p repo-site/debian
           mkdir -p repo-site/fedora
           mkdir -p repo-site/arch
+
+          # Clean up old packages and outdated database files (including .old).
+          echo "Cleaning up old release assets..."
+          rm -f repo-site/arch/*.pkg.tar.zst repo-site/arch/bingspotany*
+          rm -f repo-site/debian/*.deb repo-site/debian/Packages* repo-site/debian/Release
+          rm -rf repo-site/fedora/*.rpm repo-site/fedora/repodata
 
       # Step 3: Download existing Release assets directly using GitHub CLI (No compiling!)
       - name: Download Existing Release Assets
