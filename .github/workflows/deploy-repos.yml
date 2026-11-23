@@ -53,8 +53,8 @@ jobs:
          cd repo-site/debian
          dpkg-scanpackages . /dev/null > Packages
          gzip -9c Packages > Packages.gz
-
-       apt-ftparchive \
+         
+         apt-ftparchive \
          -o APT::FTPArchive::Release::Origin="BingSpotAny" \
          -o APT::FTPArchive::Release::Label="BingSpotAny" \
          -o APT::FTPArchive::Release::Suite="stable" \
