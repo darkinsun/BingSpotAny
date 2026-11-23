@@ -1,0 +1,15 @@
+Package: bingspotany
+Version: 1.1.10-1
+Architecture: amd64
+Maintainer: darkinsun <42946064+darkinsun@users.noreply.github.com>
+Installed-Size: 99766
+Filename: ./bingspotany_1.1.10-1_amd64.deb
+Size: 45589040
+MD5sum: 40945a9753489d387f0f8e864bd5144e
+SHA1: f348d47da18a71d190989c3644579f422ad3ed4e
+SHA256: 8c3f277df8f5a25340cc425d9b81694983169bb90d9f9f7b52b0e4bbc890fd95
+Section: utils
+Priority: optional
+Homepage: https://github.com/darkinsun/BingSpotAny
+Description: A modern, cross-platform daily wallpaper manager fetching from Bing and Spotlight
+

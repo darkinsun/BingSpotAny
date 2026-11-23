@@ -1,0 +1,19 @@
+Architectures: amd64
+Codename: stable
+Components: main
+Date: Mon, 23 Nov 2026 19:16:00 +0000
+Label: BingSpotAny
+Origin: BingSpotAny
+Suite: stable
+MD5Sum:
+ 7ad97ea360516076dc8b0fb1eeccd0a2              549 Packages
+ 4201bcb929a41e849bc7c085aee7e88b              412 Packages.gz
+SHA1:
+ 2c73742be102ff2a36bc30bca7e419c91b15de94              549 Packages
+ 1638b7e589938e075de8a5caff4b61ddf178be69              412 Packages.gz
+SHA256:
+ 92b23e738a84dd73016d1784459f574f188e3eb44074aeb6f376843ad415f356              549 Packages
+ b836cf3939c49fd10a8d65ac2c753743455172b236cd3a2ca0239ea3869fe7d7              412 Packages.gz
+SHA512:
+ 756632caa32988df8a618ada9be8719fec0c39aff0b788175bdb125a182e728043420232f73a8bc9566394e7c578e070c860da18da6b169c5479e0aa39d5aab6              549 Packages
+ 186253b6393dd2eae28c930e24bd2c1c8bf5e9f13c466b078781b69d1bffe63bf150a83c6e1820dee39d8eb78a583fc04008828dc53f1fa7f97683c050111b8a              412 Packages.gz
