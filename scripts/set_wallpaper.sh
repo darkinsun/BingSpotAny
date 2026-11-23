@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-# ScriptVersion: 1.1.1
+[ -z "$BASH_VERSION" ] && exec bash "$0" "$@"
+# ScriptVersion: 1.1.2
 # ==============================================================================
 # ACKNOWLEDGEMENT:
 # This script contains modified code originally adapted from the Variety project.
@@ -370,14 +371,18 @@ elif [ "$DE" == "awesome" ]; then
     # As such, the theme's wallpaper will briefly appear before being replaced with Variety's wallpaper.
     echo "for s in screen do require(\"gears\").wallpaper.maximized(\"$1\", s) end" | awesome-client
 
-elif [[ "$XDG_CURRENT_DESKTOP" == "COSMIC" ]]; then
-    # $WP includes clock/quotes overlays; $3 is the original image without them.
-    # Also replace Color(...) so solid-color backgrounds become an image path.
-    COSMIC_BG="$HOME/.config/cosmic/com.system76.CosmicBackground/v1/all"
-    sed -r --in-place \
-        -e 's,source: Path\(".+"\),source: Path("'"$WP"'"),gm' \
-        -e 's,source: Color\(.+\),source: Path("'"$WP"'"),gm' \
-        "$COSMIC_BG"
+elif [[ "${XDG_CURRENT_DESKTOP,,}" == *cosmic* ]]; then
+    # Update legacy, Dark/Light, and ThemeBundle configs (including per-monitor files),
+    # skipping v1/base to preserve theme defaults. Do not restart cosmic-bg.
+    COSMIC_CFG="$HOME/.config/cosmic"
+    for f in \
+        "$COSMIC_CFG"/com.system76.CosmicBackground*/v1/* \
+        "$COSMIC_CFG"/com.system76.CosmicThemeBundle.*.Background/v1/*; do
+        [[ -f "$f" && "${f##*/}" != "base" ]] && grep -q 'source:' "$f" || continue
+        sed -r --in-place \
+            -e 's,source: (Path|Color)\(.+\),source: Path("'"$WP"'"),' \
+            "$f"
+    done
 
 else
     # For simple WMs, use either feh or nitrogen

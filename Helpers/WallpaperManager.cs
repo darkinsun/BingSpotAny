@@ -96,28 +96,42 @@ namespace BingSpotAny
             {
                 var startInfo = new ProcessStartInfo
                 {
-                    FileName = RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "cmd.exe" : "/bin/sh",
-                    // For Windows pass via /c, for Unix pass via direct script shell execution
-                    Arguments = RuntimeInformation.IsOSPlatform(OSPlatform.Windows) 
-                        ? $"/c \"\"{scriptPath}\" \"{targetArgument}\"\""
-                        : $"\"{scriptPath}\" \"{targetArgument}\"",
                     UseShellExecute = false,
                     CreateNoWindow = true,
                     RedirectStandardOutput = true,
                     RedirectStandardError = true
                 };
 
+                if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                {
+                    startInfo.FileName = "cmd.exe";
+                    startInfo.Arguments = $"/c \"\"{scriptPath}\" \"{targetArgument}\"\"";
+                }
+                else
+                {
+                    // Linux uses bash (set_wallpaper.sh relies on bashisms); macOS uses /bin/sh
+                    startInfo.FileName = RuntimeInformation.IsOSPlatform(OSPlatform.Linux) ? "bash" : "/bin/sh";
+                    startInfo.ArgumentList.Add(scriptPath);
+                    startInfo.ArgumentList.Add(targetArgument);
+                }
+
                 using var process = Process.Start(startInfo);
                 if (process == null) return false;
 
+                // Read streams concurrently before WaitForExitAsync to prevent pipe deadlocks
+                Task<string> outputTask = process.StandardOutput.ReadToEndAsync();
+                Task<string> errorTask = process.StandardError.ReadToEndAsync();
+
                 await process.WaitForExitAsync();
 
-                string errorOutput = await process.StandardError.ReadToEndAsync();
+                await outputTask;
+                string errorOutput = await errorTask;
+
                 if (!string.IsNullOrWhiteSpace(errorOutput))
                 {
                     Console.WriteLine($"\n[DETAILED SCRIPT ERROR] -> {errorOutput}\n");
                 }
-                
+
                 return process.ExitCode == 0;
             }
             catch (Exception ex)
