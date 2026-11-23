@@ -1,5 +1,5 @@
 Name:           bingspotany-bin
-Version:        1.1.9
+Version:        1.1.10
 Release:        1%{?dist}
 Summary:        A modern, cross-platform daily wallpaper manager
 License:        GPLv3
@@ -55,6 +55,8 @@ EOF
 /usr/share/applications/bingspotany.desktop
 
 %changelog
-* Wed Oct 28 2026 darkinsun <42946064+darkinsun@users.noreply.github.com> - 1.1.9-1
-- Switch SpotlightProvider from delayed RSS feed to direct homepage HTML scraping
-- Update build parameters in build_all.sh
+* Mon Nov 23 2026 darkinsun <42946064+darkinsun@users.noreply.github.com> - 1.1.10-1
+- Update Avalonia UI to 12.2.0
+- Invoke Linux wallpaper scripts with bash instead of /bin/sh to fix dash compatibility
+- Update COSMIC 1.11 wallpaper handling (Dark/Light themes and ThemeBundle support)
+- Bump bundled ScriptVersion to 1.1.2 and add bash re-exec guard
